@@ -3,4 +3,11 @@
 
 #include <Arduino.h>
 
+class Actuator {
+
+protected:
+
+public :
+
+};
 #endif
