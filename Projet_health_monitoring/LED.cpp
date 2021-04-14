@@ -1,58 +1,33 @@
 #include "LED.h"
 
-Led::Led()
-{
-    ledOn = false;
+Led::Led(){
+  isOn = false;
+  numPort=0;
 }
 
-Led::Led(bool state)
-{
-    ledOn = state;
-    numLed=D3;
-}
-
-Led::Led(int num)
-{ 
-    numLed=num;
-    ledOn = false;
-}
-
-Led::Led(bool state,int num)
-{
-    numLed=num;
-    ledOn = state;
+Led::Led(bool state,int port){
+  isOn = state;  
+  numPort=port; 
 }
 
 
-void Led::setLedOn(bool state)
-{
-    ledOn = state;
-}
-
-void Led::setNumLed(int num)
-{
-    numLed=num;
-}
-void Led::turnOnLed()
+void Led::turnOn()
 {
     
-    digitalWrite(numLed, HIGH);
+    digitalWrite(numPort, HIGH);
+    isOn=true;
     
 }
 
-void Led::turnOffLed()
+void Led::turnOff()
 {
     
-    digitalWrite(numLed, LOW);
-    
+    digitalWrite(numPort, LOW);
+    isOn=false;
 }
 
-bool Led::isLedOn()
+void Led::setUp()
 {
-    return ledOn;
-}
-
-int Led::getNumLed()
-{
-   return numLed;
+    pinMode(numPort,OUTPUT);
+    turnOff();
 }

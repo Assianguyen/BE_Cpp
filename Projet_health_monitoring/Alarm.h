@@ -6,23 +6,31 @@
 using namespace std;
 
 class Alarm {
-
+  
   protected :
 
-    bool alarmOn;
+    bool isOn;
+    int numPort;
 
   public :
 
   //constructeurs
   Alarm();
 
-  Alarm(bool state);
+  Alarm(bool state,int port);
 
   //fonctions annexes 
 
-  void setAlarmOn(bool state);
+  void setState(bool state);
+  void setPort(int port);
 
-  bool isAlarmOn();
+  bool getState();
+  int getPort();
+
+  virtual void turnOn()=0; //utilisée que par les classes filles
+  virtual void turnOff()=0;
+  virtual void setUp()=0;
+  
   
   //destructeur
   

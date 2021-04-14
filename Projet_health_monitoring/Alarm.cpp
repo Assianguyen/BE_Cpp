@@ -1,17 +1,28 @@
 #include "Alarm.h"
 
 Alarm::Alarm(){
-  alarmOn = false;
+  isOn = false;
+  numPort=0;
 }
 
-Alarm::Alarm(bool state){
-  alarmOn = state;
+Alarm::Alarm(bool state,int port){
+  isOn = state;  
+  numPort=port;
 }
 
-void Alarm::setAlarmOn(bool state){
-	alarmOn = state;
+void Alarm::setState(bool state){
+	isOn = state;
 }
 
-bool Alarm::isAlarmOn() {
-	return alarmOn;
+
+ void Alarm::setPort(int port){
+  numPort=port;  
+ }
+ 
+bool Alarm::getState() {
+	return isOn;
+}
+
+int Alarm::getPort() {
+  return numPort;
 }

@@ -1,58 +1,31 @@
 #include "Buzzer.h"
 
-Buzzer::Buzzer()
-{
-    buzzerOn = false;
+Buzzer::Buzzer(){
+  isOn = false;
+  numPort=0;
+}
+Buzzer::Buzzer(bool state,int port){
+  isOn = state;  
+  numPort=port; 
 }
 
-Buzzer::Buzzer(bool state)
-{
-    buzzerOn = state;
-    numBuzzer=D7;
-}
-
-Buzzer::Buzzer(int num)
-{ 
-    numBuzzer=num;
-    buzzerOn = false;
-}
-
-Buzzer::Buzzer(bool state,int num)
-{
-    numBuzzer=num;
-    buzzerOn = state;
-}
-
-
-void Buzzer::setBuzzerOn(bool state)
-{
-    buzzerOn = state;
-}
-
-void Buzzer::setNumBuzzer(int num)
-{
-    numBuzzer=num;
-}
-void Buzzer::turnOnBuzzer()
+void Buzzer::turnOn()
 {
     
-    digitalWrite(numBuzzer, HIGH);
+    digitalWrite(numPort, HIGH);
+    isOn=true;
     
 }
 
-void Buzzer::turnOffBuzzer()
+void Buzzer::turnOff()
 {
     
-    digitalWrite(numBuzzer, LOW);
-    
+    digitalWrite(numPort, LOW);
+    isOn=false;
 }
 
-bool Buzzer::isBuzzerOn()
+void Buzzer::setUp()
 {
-    return buzzerOn;
-}
-
-int Buzzer::getNumBuzzer()
-{
-   return numBuzzer;
+    pinMode(numPort,OUTPUT);
+    turnOff();
 }

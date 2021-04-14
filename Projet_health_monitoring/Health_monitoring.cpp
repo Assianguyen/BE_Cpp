@@ -5,30 +5,29 @@
 Monitoring::Monitoring(){
     led1=Led(false,D3);
     buzzer1=Buzzer(false,D7);
-    //led1.setNumLed(D3);
     
 }
 
-Monitoring::Monitoring(Led lum, Buzzer buzz){
+Monitoring::Monitoring(Led lum,Buzzer buzz){
+
     led1=lum;
     buzzer1=buzz;
     
 }
 
 void Monitoring::setUpMonitoring(){
-  
-  pinMode(led1.getNumLed(), OUTPUT); 
-  pinMode (buzzer1.getNumBuzzer(), OUTPUT);
-  
+
+  led1.setUp(); 
+  buzzer1.setUp();
 }
 
 void Monitoring::startMonitoring()
 { 
-  led1.turnOnLed();
-  buzzer1.turnOnBuzzer();
+  led1.turnOn();
+  buzzer1.turnOn();
   delay(1000);
-  led1.turnOffLed();
-  buzzer1.turnOffBuzzer();
+  led1.turnOff();
+  buzzer1.turnOff();
   delay(1000);
   
 }

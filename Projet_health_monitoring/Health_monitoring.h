@@ -1,23 +1,21 @@
 #ifndef HEALTH_MONITORING_H
 #define HEALTH_MONITORING_H
 
-#include "LED.h"
 #include "Buzzer.h"
+#include "Led.h"
 
 #include <Arduino.h>
 
 class Monitoring {
 	
 protected :
-
-  //a remplacer par alarm
   Led led1; //objet LED
-  Buzzer buzzer1; //objet Buzzer
+  Buzzer buzzer1;
 
 public :
 
   Monitoring();
-  Monitoring(Led lum, Buzzer buzz);
+  Monitoring(Led lum,Buzzer buzz);
 
   void setUpMonitoring();
 

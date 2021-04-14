@@ -10,28 +10,16 @@ class Buzzer : public Alarm {
 
   friend class Monitoring;
 
-protected:
-
-    bool buzzerOn;
-    int numBuzzer;
-
 public:
 
     //constructeurs
     Buzzer();
-    Buzzer(bool state);
-    Buzzer(int num);
-    Buzzer(bool state,int num);
-
+    Buzzer(bool state,int port);
     //fonctions annexes 
 
-    void setBuzzerOn(bool state);
-    void setNumBuzzer(int num);
-    void turnOnBuzzer();
-    void turnOffBuzzer();
-
-    bool isBuzzerOn();
-    int getNumBuzzer();
+    virtual void turnOn();
+    virtual void turnOff();
+    virtual void setUp();
 };
 
 #endif

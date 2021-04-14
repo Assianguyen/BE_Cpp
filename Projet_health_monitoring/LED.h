@@ -8,29 +8,18 @@ using namespace std;
 class Led : public Alarm {
 
   friend class Monitoring;
-
-protected:
-
-    bool ledOn;
-    int numLed;
-
+  
 public:
 
     //constructeurs
     Led();
-    Led(bool state);
-    Led(int num);
-    Led(bool state,int num);
-
+    Led(bool state,int port);
+    
     //fonctions annexes 
 
-    void setLedOn(bool state);
-    void setNumLed(int num);
-    void turnOnLed();
-    void turnOffLed();
-
-    bool isLedOn();
-    int getNumLed();
+    virtual void turnOn();
+    virtual void turnOff();
+    virtual void setUp();
 
     //destructeur
 
