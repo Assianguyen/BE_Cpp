@@ -9,34 +9,31 @@ class Sensor {
 protected:
 
     bool atRisk;
-    int maxValue;
-    int minValue;
+    bool warning;
+    float maxValue;
+    float minValue;
+    int numPort;
 
 public:
 
     //constructeurs
     Sensor();
 
-    Sensor(bool state);
-
-    Sensor(int min, int max);
-
-    Sensor(bool state, int min, int max);
+    Sensor(bool stateRisk, bool stateWarning, float min, float max, int port);
 
     //fonctions annexes 
 
     void setAtRisk(bool state);
+    void setWarning(bool state);
 
-    void setMinValue(int min);
+    float getMinValue();
+    float getMaxValue();
+    bool getAtRisk();
+    bool getWarning();
 
-    void setMaxValue(int max);
-
-    bool isAtRisk();
-
-    int getMinValue();
-
-    int getMaxValue();
-
+    virtual void setUp() = 0;
+    virtual float getValue()=0;
+    virtual void isAtRisk(float value) = 0;
     //destructeur
 
 };

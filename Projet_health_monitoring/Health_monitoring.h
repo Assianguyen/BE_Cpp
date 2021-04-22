@@ -5,6 +5,8 @@
 #include "Led.h"
 #include "Switch.h"
 #include "Potentiometer.h"
+#include "Temperature.h"
+#include "Oxymeter.h"
 
 #include <Arduino.h>
 
@@ -15,12 +17,13 @@ protected :
   Buzzer buzzer1;
   Switch switch1;
   Potentiometer potent1;
- 
+  Temperature temp1;
+  Oxymeter oxy1;
 
 public :
 
   Monitoring();
-  Monitoring(Led lum,Buzzer buzz,Switch bouton,Potentiometer pot);
+  Monitoring(Led lum,Buzzer buzz,Switch bouton,Potentiometer pot, Temperature thermo, Oxymeter oxym);
 
   void setUpMonitoring();
 

@@ -6,10 +6,22 @@
 
 class Temperature : public Sensor {
 
+  friend class Monitoring;
+  
 protected:
+
+  float warningTemp;
 
 public:
 
+    //constructeurs
+    Temperature();
+
+    Temperature(bool stateRisk, bool stateWarning, float min, float warnTemp, float max, int port);
+    virtual void setUp();
+    virtual float getValue(); 
+    virtual void isAtRisk(float value);
+    
 };
 
 #endif

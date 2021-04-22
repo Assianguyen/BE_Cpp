@@ -4,11 +4,11 @@
 Sensor::Sensor()
 {
 	atRisk = false;
-	minValue = numeric_limits<int>::min();
-	maxValue = numeric_limits<int>::max();
+	minValue = numeric_limits<float>::min();
+	maxValue = numeric_limits<float>::max();
 }
 
-Sensor::Sensor(bool state)
+/*Sensor::Sensor(bool state)
 {
 	atRisk = state;
 	minValue = numeric_limits<int>::min();
@@ -21,12 +21,14 @@ Sensor::Sensor(int min, int max)
 	minValue = min;
 	maxValue = max;
 }
-
-Sensor::Sensor(bool state, int min, int max)
+*/
+Sensor::Sensor(bool stateRisk, bool stateWarning, float min, float max, int port)
 {
-	atRisk = state;
+	atRisk = stateRisk;
+  warning = stateWarning;
 	minValue = min;
 	maxValue = max;
+ numPort = port;
 }
 
 void Sensor::setAtRisk(bool state)
@@ -34,27 +36,27 @@ void Sensor::setAtRisk(bool state)
 	atRisk = state;
 }
 
-void Sensor::setMinValue(int min)
+void Sensor::setWarning(bool state)
 {
-	minValue = min;
+  warning = state;
 }
 
-void Sensor::setMaxValue(int max)
-{
-	maxValue = max;
-}
-
-bool Sensor::isAtRisk()
-{
-	return atRisk;
-}
-
-int Sensor::getMinValue()
+float Sensor::getMinValue()
 {
 	return minValue;
 }
 
-int Sensor::getMaxValue()
+float Sensor::getMaxValue()
 {
 	return maxValue;
+}
+
+bool Sensor::getAtRisk()
+{
+  return atRisk;
+}
+
+bool Sensor::getWarning()
+{
+  return warning;
 }
