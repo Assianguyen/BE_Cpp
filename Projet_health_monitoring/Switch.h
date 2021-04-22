@@ -6,9 +6,11 @@
 
 class Switch : public Actuator {
 
+friend class Monitoring;
+
 protected:
 
-	bool switchOn;
+  bool isOn;
 
 public:
 
@@ -16,13 +18,18 @@ public:
 
 	Switch();
 
-	Switch(bool state);
+	Switch(bool state, int port);
 
 	//fonctions annexes
 
 	void setSwitchOn(bool state);
-
 	bool isSwitchOn();
+  //pour touch sensor
+
+  bool getValue();
+
+  virtual void setUp();
+  
 
 };
 

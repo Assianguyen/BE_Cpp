@@ -2,20 +2,40 @@
 
 Switch::Switch()
 {
-	switchOn = false;
+	isOn = false;
 }
 
-Switch::Switch(bool state)
+Switch::Switch(bool state, int port)
 {
-	switchOn = state;
+	isOn = state;
+  numPort=port;
 }
 
 void Switch::setSwitchOn(bool state)
 {
-	switchOn = state;
+	isOn = state;
 }
 
 bool Switch::isSwitchOn()
 {
-	return switchOn;
+	return isOn;
+}
+bool Switch::getValue()
+{
+  int touchValue = digitalRead(numPort);
+  if (touchValue == HIGH)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  } 
+}
+
+void Switch::setUp()
+{
+
+  //Serial.begin(9600); 
+  pinMode(numPort,INPUT);
 }
