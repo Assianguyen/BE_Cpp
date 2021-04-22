@@ -19,7 +19,6 @@ void Buzzer::turnOn()
 
 void Buzzer::turnOff()
 {
-    
     digitalWrite(numPort, LOW);
     isOn=false;
 }
