@@ -1,17 +1,19 @@
-#define heartratePin A1
+#define heartratePin A0
 #include"DFRobot_Heartrate.h"
 
-DFRobot_Heartrate heartrate(DIGITAL_MODE);
+DFRobot_Heartrate heartrate(ANALOG_MODE);
 
 ///< ANALOG_MODE or DIGITAL_MODE
-voidsetup(){  
+void setup(){  
   Serial.begin(115200);
   }
-  voidloop(){
+  
+ void loop(){
     uint8_t rateValue;
     heartrate.getValue(heartratePin);///< A1 foot sampled values  
     rateValue = heartrate.getRate();///< Get heart rate value 
-    if(rateValue){    
+    if(rateValue!=0){    
+      Serial.println("BPM = ");
       Serial.println(rateValue);
       }
       delay(20);

@@ -1,4 +1,4 @@
-int Buzzer = 5; //for Arduino Microcontroller
+int Buzzer = 10; //for Arduino Microcontroller
 //int Buzzer = D7; //for ESP8266 Microcontroller
 //int Buzzer = 4; //for ESP32 Microcontroller
 
