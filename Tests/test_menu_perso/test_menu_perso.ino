@@ -43,7 +43,7 @@ void setup() {
 
   /* Configuration du LCD */
   //lcd.begin(16, 2);
-  u8g2.begin();
+  u8g2.begin(buttons[1], U8X8_PIN_NONE, buttons[2], U8X8_PIN_NONE, buttons[0], U8X8_PIN_NONE);
   
   displayScreen(WELCOME, nbWelcomeItems);
   delay(2000);
@@ -121,7 +121,7 @@ void displayMenu(Menu &menu) {
   /* Variable pour le menu */
   byte selectedMenuItem = 0;   // Choix sélectionné
   byte shouldExitMenu = false; // Devient true quand l'utilisateur veut quitter le menu
-  BUTTON buttonPressed;      // Contient le bouton appuyé
+  int8_t buttonPressed;      // Contient le bouton appuyé
  
   /* Tant que l'utilisateur ne veut pas quitter pas le menu */
   while(!shouldExitMenu) {
@@ -130,8 +130,7 @@ void displayMenu(Menu &menu) {
     //u8g2.clear();
     u8g2.setFont(u8g2_font_pressstart2p_8f);
     u8g2.firstPage();
-    do {
-    u8g2.setFont(u8g2_font_pressstart2p_8f);    
+    do {  
       u8g2.drawStr(0,10,menu.getPrompt());
       for (int i = 0; i < menu.getNbItems(); i++){
         u8g2.drawStr(0,((i+1)*10),menu.getSelectedItem(i));
@@ -141,45 +140,52 @@ void displayMenu(Menu &menu) {
     //lcd.setCursor(0, 1);
     //lcd.print(menu.getSelectedItem(selectedMenuItem));
  
-    /* Attend le relâchement du bouton */
-    while(readPushButton() != BP_NONE);
- 
-    /* Attend l'appui sur un bouton */
-    while((buttonPressed = readPushButton()) == BP_NONE);
- 
-    /* Anti rebond pour le bouton */
-    delay(30);
- 
-    /* Attend le relâchement du bouton */
-    while(readPushButton() != BP_NONE);
+//    /* Attend le relâchement du bouton */
+//    while((buttonPressed = readPushButton()) != BP_NONE);
+// 
+//    /* Attend l'appui sur un bouton */
+//    while((buttonPressed = readPushButton()) == BP_NONE);
+// 
+//    /* Anti rebond pour le bouton */
+//    delay(30);
+// 
+//    /* Attend le relâchement du bouton */
+//    while((buttonPressed = readPushButton()) != BP_NONE);
+    do{
+      buttonPressed = u8g2.getMenuEvent();
+    } while(buttonPressed == 0);
  
     /* Gére l'appui sur le bouton */
     switch(buttonPressed) {
-    case BP_UP: // Bouton haut = choix précédent
+    case U8X8_MSG_GPIO_MENU_UP: // Bouton haut = choix précédent
  
       /* S'il existe un choix précédent */
       if(selectedMenuItem > 0) {
  
         /* Passe au choix précédent */
         selectedMenuItem--;
+        u8g2.drawStr(0,((selectedMenuItem+1)*10),">");
+        u8g2.drawStr(10,((selectedMenuItem+1)*10),menu.getSelectedItem(selectedMenuItem));
       }
       break;
  
-    case BP_DOWN: // Bouton bas = choix suivant
+    case U8X8_MSG_GPIO_MENU_DOWN: // Bouton bas = choix suivant
  
       /* S'il existe un choix suivant */
       if(selectedMenuItem < (menu.getNbItems() - 1)) {
  
         /* Passe au choix suivant */
         selectedMenuItem++;
+        u8g2.drawStr(0,((selectedMenuItem+1)*10),">");
+        u8g2.drawStr(10,((selectedMenuItem+1)*10),menu.getSelectedItem(selectedMenuItem));
       }
       break;
  
-    case BP_LEFT: // Bouton gauche = sorti du menu
+    case U8X8_MSG_GPIO_MENU_PREV: // Bouton gauche = sorti du menu
       shouldExitMenu = true;
       break;
  
-    case BP_RIGHT:  // Bouton droit ou SELECT = validation du choix
+    case U8X8_MSG_GPIO_MENU_SELECT:  // Bouton droit ou SELECT = validation du choix
       menu.getCallbackFnct(selectedMenuItem);
       break;
     }
