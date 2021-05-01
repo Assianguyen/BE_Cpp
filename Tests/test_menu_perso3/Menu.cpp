@@ -58,16 +58,24 @@ void Menu::getCallbackFnct(int selectedItem){
 void Menu::displayScreen() {
   do {
     for (int i = 0; i < nbItems; i++){
+      u8g2.setDrawColor(2);
       u8g2.drawStr(0,((i+1)*10),items[i]);
     }
   } while ( u8g2.nextPage() );
 }
 
-void Menu::displayMenu() {
+void Menu::displayMenu(int cursorP) {
    do {
+    u8g2.setFontMode(1);
+    u8g2.setDrawColor(1);
+    u8g2.drawBox(0, ((cursorP+1)*10)+1, 140, 10);
+    u8g2.setFont(u8g2_font_pressstart2p_8f);
+    u8g2.setDrawColor(2);
     u8g2.drawStr(0,10,prompt);
     for (int i = 0; i < nbItems; i++){
       u8g2.drawStr(0,((i+2)*10),items[i]);
     }
+//    u8g2.setDrawColor(2);
+//    u8g2.drawStr(0, (cursorP+2)*10, this->getSelectedItem(cursorP)); 
    } while ( u8g2.nextPage() );
 }

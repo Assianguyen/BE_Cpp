@@ -23,7 +23,7 @@ const int prevMonitoring = 3;
 
 const int nbSettingsItems = 11;
 const int firstSettings = 5;
-const int lastSettings = 5;
+const int lastSettings = 6;
 const int prevSettings = 3;
 
 const int nbYesNoItems = 11;
@@ -139,7 +139,7 @@ static const char* SETTINGS_ITEMS[] = {
   "",
   "",
   "   Change age   ",
-  "",
+  "  Exit settings ",
   "",
   "",
   "",
@@ -167,13 +167,13 @@ static const char* GOODBYE[] = {
   "",
   "",
   "",
-  "See you soon",
+  "  See you soon  ",
   "",
   "",
   "",
   "",
-  "LOGO",
-  "LOGO"
+  "      LOGO      ",
+  "      LOGO      "
 };
 
 #endif

@@ -7,20 +7,20 @@
 
 //const int nbButtons = 3;
 
-//const int selectPin = 7;
-//const int upPin  = 8;
-//const int downPin = 6;
-//const int downPin = 5;
-//const int ledPin = 9;
-//const int buzzerPin = 10;
-//
-//const int nAge = 1;
-//const int nSubAge = 2;
-//const int nMonitoring = 3;
-//const int nSettings = 4;
-//const int nYesNo = 5;
-//const int nAlarm = 6;
-//const int nAlarmHelp = 7;
+const int selectPin = 7;
+const int upPin  = 8;
+const int downPin = 6;
+const int returnPin = 5;
+const int ledPin = 9;
+const int buzzerPin = 10;
+
+const int nAge = 1;
+const int nSubAge = 2;
+const int nMonitoring = 3;
+const int nSettings = 4;
+const int nYesNo = 5;
+const int nAlarm = 6;
+const int nAlarmHelp = 7;
  
 //U8G2_SH1107_SEEED_128X128_1_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
 
@@ -29,9 +29,9 @@ static int age_diz = 0;
 static int age_unit = 0;
 
 static int selectedOption = 0;
-static int actualMenu = 1;
-static int previousMenu = 1;
-static int cursorPosition = 1;
+static int actualMenu = nAge;
+static int previousMenu = nAge;
+static int cursorPosition = firstAge;
 
 static byte pressedUp = 0;
 static byte pressedDown = 0;
@@ -81,33 +81,31 @@ void loop() {
 }
 
 void checkButton(){
-  pressedUp = digitalRead(8);
-  pressedDown = digitalRead(6);
-  pressedSelect = digitalRead(7);
-  //pressedReturn = digitalRead(5);
+  pressedUp = digitalRead(upPin);
+  pressedDown = digitalRead(downPin);
+  pressedSelect = digitalRead(selectPin);
+  //pressedReturn = digitalRead(returnPin);
 
   if(pressedUp == HIGH){
     if(cursorPosition>=getActualMenu().getFirst()){
       cursorPosition--; 
       nonePressed = 0;
-      do{
-        //CHANGER LE SURLIGNAGE
-        u8g2.setDrawColor(1);
-        u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
-        u8g2.setDrawColor(2);
-        u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
-      } while( u8g2.nextPage() );     
+//      do{
+//        u8g2.setDrawColor(1);
+//        u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
+//        u8g2.setDrawColor(2);
+//      } while( u8g2.nextPage() );     
     }
   } else if(pressedDown == HIGH){
     if(cursorPosition<=getActualMenu().getLast()){
       cursorPosition++;  
       nonePressed = 0;
-      do{
-        u8g2.setDrawColor(1);
-        u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
-        u8g2.setDrawColor(2);
-        u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
-      } while( u8g2.nextPage() );   
+//      do{
+//        u8g2.setDrawColor(1);
+//        u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
+//        u8g2.setDrawColor(2);
+//        u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
+//      } while( u8g2.nextPage() );   
     }
   } else if(pressedSelect == HIGH){
     getActualMenu().getCallbackFnct(cursorPosition);
@@ -122,14 +120,14 @@ void checkButton(){
 }
 
 void updateMenu(){
- getActualMenu().displayMenu();
- do{
-  u8g2.setDrawColor(1);
-  u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
-  u8g2.setDrawColor(2);
-  u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
-  } while( u8g2.nextPage() );
-  
+ 
+// do{
+//  u8g2.setDrawColor(1);
+//  u8g2.drawBox(0, (cursorPosition+1)*10, 140, 10);
+//  u8g2.setDrawColor(2);
+  //u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
+//  } while( u8g2.nextPage() );
+  getActualMenu().displayMenu(cursorPosition);
   //Serial.println("Age : "+age);
 }
 
@@ -167,7 +165,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 1;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
  
@@ -175,7 +173,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 2;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
  
@@ -183,7 +181,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 3;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;    
+    actualMenu = nSubAge;    
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -191,7 +189,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 4;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -199,7 +197,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 5;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -207,7 +205,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 6;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -215,7 +213,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 7;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -223,7 +221,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 8;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -231,7 +229,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 9;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -239,7 +237,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 10;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -247,7 +245,7 @@ void doAgeMenuAction(int selectedMenuItem) {
     age_diz = 11;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 2;
+    actualMenu = nSubAge;
     cursorPosition = getActualMenu().getFirst();
     break;
   }
@@ -261,7 +259,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
  
@@ -270,7 +268,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
  
@@ -279,7 +277,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -288,7 +286,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -297,7 +295,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -306,7 +304,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -315,7 +313,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -324,7 +322,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
 
@@ -333,7 +331,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
     
@@ -342,7 +340,7 @@ void doSubAgeAction(int selectedMenuItem) {
     age = age_diz*10+age_unit;
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
   }
@@ -357,21 +355,21 @@ void doMonitoringAction(int selectedMenuItem) {
     digitalWrite (10, HIGH);
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 7;
+    actualMenu = nAlarmHelp;
     cursorPosition = getActualMenu().getFirst();
     break;
  
   case 8:
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 4;
+    actualMenu = nSettings;
     cursorPosition = getActualMenu().getFirst();
     break;
 
   case 9:
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 5;
+    actualMenu = nYesNo;
     cursorPosition = getActualMenu().getFirst();
     break;
  }
@@ -383,7 +381,13 @@ void doSettingsAction(int selectedMenuItem) {
   case 5:
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 1;
+    actualMenu = nAge;
+    cursorPosition = getActualMenu().getFirst();
+    break;
+  case 6:
+    u8g2.clear();
+    previousMenu = actualMenu;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
  }
@@ -400,7 +404,7 @@ void doYesNoAction(int selectedMenuItem) {
   case 6:
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
  }
@@ -415,7 +419,7 @@ void doAlarmAction(int selectedMenuItem) {
     digitalWrite (10, LOW);
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
  }
@@ -430,7 +434,7 @@ void doAlarmHelpAction(int selectedMenuItem) {
     digitalWrite (10, LOW);
     u8g2.clear();
     previousMenu = actualMenu;
-    actualMenu = 3;
+    actualMenu = nMonitoring;
     cursorPosition = getActualMenu().getFirst();
     break;
  }

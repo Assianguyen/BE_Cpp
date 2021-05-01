@@ -45,7 +45,7 @@ public :
 
   void displayScreen();
 
-  void displayMenu();
+  void displayMenu(int cursorP);
 };
  
 #endif /* MENU_H_ */
