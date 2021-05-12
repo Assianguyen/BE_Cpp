@@ -8,11 +8,13 @@ void setup(){
   Serial.begin(115200);
   Serial.println("setup done");
   }
-  void loop(){
+  
+ void loop(){
     uint8_t rateValue;
     heartrate.getValue(heartratePin);///< A0 foot sampled values  
     rateValue = heartrate.getRate();///< Get heart rate value 
-    if(rateValue){    
+    if(rateValue!=0){    
+      Serial.println("BPM = ");
       Serial.println(rateValue);
       }
       delay(20);
