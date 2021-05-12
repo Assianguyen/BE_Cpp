@@ -9,9 +9,10 @@ Monitoring::Monitoring(){
     potent1=Potentiometer(510,A0);
     temp1=Temperature(false, false, 36.0,38.0,40.0,A0);
     oxy1=Oxymeter(false,false,55.0, 200.0,A0,0.0);
+    message=Sms(80);
 }
 
-Monitoring::Monitoring(Led lum,Buzzer buzz, Switch bouton,Potentiometer pot, Temperature thermo,Oxymeter oxym){
+Monitoring::Monitoring(Led lum,Buzzer buzz, Switch bouton,Potentiometer pot, Temperature thermo,Oxymeter oxym, Sms mess){
 
     led1=lum;
     buzzer1=buzz;
@@ -19,17 +20,20 @@ Monitoring::Monitoring(Led lum,Buzzer buzz, Switch bouton,Potentiometer pot, Tem
     potent1=pot;
     temp1=thermo;
     oxy1=oxym;
+    message=mess;
 }
 
 void Monitoring::setUpMonitoring(){
 
+  Serial.begin(115200);
   led1.setUp(); 
   buzzer1.setUp();
   switch1.setUp();
-  potent1.setUp();
-  temp1.setUp();
-  oxy1.setUp();
-  oxy1.setMaxValue();
+  //potent1.setUp();
+  //temp1.setUp();
+  //oxy1.setUp();
+  //oxy1.setMaxValue();
+  message.setUp();
 }
 
 void Monitoring::startMonitoring()
@@ -45,6 +49,7 @@ void Monitoring::startMonitoring()
     }
     else{
       led1.turnOn();
+      message.sendEvent("alarm_on");
     }
     if (buzzer1.getState()){
       buzzer1.turnOff();

@@ -7,6 +7,7 @@
 #include "Potentiometer.h"
 #include "Temperature.h"
 #include "Oxymeter.h"
+#include "Sms.h"
 
 #include <Arduino.h>
 
@@ -19,11 +20,12 @@ protected :
   Potentiometer potent1;
   Temperature temp1;
   Oxymeter oxy1;
+  Sms message;
 
 public :
 
   Monitoring();
-  Monitoring(Led lum,Buzzer buzz,Switch bouton,Potentiometer pot, Temperature thermo, Oxymeter oxym);
+  Monitoring(Led lum,Buzzer buzz,Switch bouton,Potentiometer pot, Temperature thermo, Oxymeter oxym, Sms mess);
 
   void setUpMonitoring();
 
