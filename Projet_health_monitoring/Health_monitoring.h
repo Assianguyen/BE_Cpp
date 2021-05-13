@@ -40,7 +40,7 @@ protected :
   Switch selectButton;
   Temperature temp1;
   static Oxymeter oxy1;
-  Sms message;
+  static Sms message;
   
   Menu welcome;
   //Menu goodbye;
@@ -58,8 +58,7 @@ public :
 
   //constructeurs
   Monitoring();
-  Monitoring(Led lum,Buzzer buzz, Temperature thermo, Oxymeter oxym);
-  Monitoring(Led lum,Buzzer buzz,Switch bouton,Potentiometer pot, Temperature thermo, Oxymeter oxym, Sms mess);
+  Monitoring(Led lum,Buzzer buzz, Temperature thermo, Oxymeter oxym, Sms mess);
 
   //méthodes
   void setUpMonitoring();

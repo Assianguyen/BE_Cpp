@@ -28,6 +28,7 @@ Monitoring* Monitoring::This = 0;
 Led Monitoring::led1 = Led(false,9); //objet LED
 Buzzer Monitoring::buzzer1 = Buzzer(false,10);
 Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0);
+Sms Monitoring::message = Sms(80);
 
 Monitoring::Monitoring(){
 //    led1 = Led(false,D3);
@@ -43,7 +44,7 @@ Monitoring::Monitoring(){
     upButton = Switch(false,8);
     downButton = Switch(false,6);
     selectButton = Switch(false,7);
-    message=Sms(80);
+    //message=Sms(80);
     temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
     //oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
     welcome = Menu(WELCOME, nbWelcomeItems);
@@ -57,12 +58,13 @@ Monitoring::Monitoring(){
     alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, nbAlarmHelpItems, firstAlarmHelp, lastAlarmHelp, &doAlarmHelpAction);
 }
 
-Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym){
+Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sms mess){
     This = this;
     led1 = lum;
     buzzer1 = buzz;
     temp1 = thermo;
-    oxy1 = oxym;/*
+    oxy1 = oxym;
+    message = mess;/*
     welcome = Menu(WELCOME, nbWelcomeItems);
     goodbye = Menu(GOODBYE, nbGoodbyeItems);
     ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, nbAgeMenuItems, firstAge, lastAge, prevAgeMenu, &Monitoring::doAgeMenuAction);
@@ -90,16 +92,6 @@ void Monitoring::setUpMonitoring(){
   welcome.displayScreen();
   delay(2000);
   u8g2.clear();
-}
-
-Monitoring::Monitoring(Led lum,Buzzer buzz, Switch bouton,Potentiometer pot, Temperature thermo,Oxymeter oxym, Sms mess){
-    led1=lum;
-    buzzer1=buzz;
-    switch1=bouton;
-    potent1=pot;
-    temp1=thermo;
-    oxy1=oxym;
-    message=mess;
 }
 
 void Monitoring::startMonitoring()
