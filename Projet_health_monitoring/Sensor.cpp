@@ -1,27 +1,14 @@
 #include "Sensor.h"
-#include <limits>
+#include <limits.h>
 
+//constructeurs
 Sensor::Sensor()
 {
 	atRisk = false;
-	minValue = numeric_limits<float>::min();
-	maxValue = numeric_limits<float>::max();
+	minValue = 0.0;
+	maxValue = 0.0;
 }
 
-/*Sensor::Sensor(bool state)
-{
-	atRisk = state;
-	minValue = numeric_limits<int>::min();
-	maxValue = numeric_limits<int>::max();
-}
-
-Sensor::Sensor(int min, int max)
-{
-	atRisk = false;
-	minValue = min;
-	maxValue = max;
-}
-*/
 Sensor::Sensor(bool stateRisk, bool stateWarning, float min, float max, int port)
 {
 	atRisk = stateRisk;
@@ -31,6 +18,7 @@ Sensor::Sensor(bool stateRisk, bool stateWarning, float min, float max, int port
  numPort = port;
 }
 
+//méthodes
 void Sensor::setAtRisk(bool state)
 {
 	atRisk = state;

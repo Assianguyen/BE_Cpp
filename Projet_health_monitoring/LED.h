@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 #include "Alarm.h"
-using namespace std;
 
 class Led : public Alarm {
 
@@ -15,14 +14,10 @@ public:
     Led();
     Led(bool state,int port);
     
-    //fonctions annexes 
-
+    //méthodes
     virtual void turnOn();
     virtual void turnOff();
     virtual void setUp();
-
-    //destructeur
-
 };
 
 #endif

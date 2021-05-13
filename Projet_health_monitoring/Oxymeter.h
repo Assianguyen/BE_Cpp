@@ -10,19 +10,26 @@ class Oxymeter : public Sensor {
   
 protected :
 
-  float age;
+  int ageDiz;
+  int ageUnit;
+  int age;
 
 public :
 
     //constructeurs
     Oxymeter();
+    Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int port, int yo);
 
-    Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int port, float yo);
-
+    //méthodes
     void setMaxValue();
 
-    float getAge();
-    void setAge(float yo);
+    int getAge();
+    void setAge(int yo);
+    int getAgeDiz();
+    void setAgeDiz(int yoD);
+    int getAgeUnit();
+    void setAgeUnit(int yoU);
+    void calculateAge();
     
     virtual void setUp();
     virtual float getValue();

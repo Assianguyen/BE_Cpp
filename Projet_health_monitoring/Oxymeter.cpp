@@ -1,42 +1,65 @@
 #include "Oxymeter.h"
 
+//constructeurs
 Oxymeter::Oxymeter(){
   atRisk = false;
   warning = false;
   minValue = 55.0;
-  maxValue = numeric_limits<float>::max();
+  maxValue = 0.0;
   numPort = A0;
-  age = 0.0;
+  ageDiz = 0;
+  ageUnit = 0;
+  age = 0;
 }
 
-Oxymeter::Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int port, float yo){
+Oxymeter::Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int port, int yo){
   atRisk = stateRisk;
   warning = stateWarning;
   minValue = min;
   maxValue = max;
   numPort = port;
+  ageDiz = 0;
+  ageUnit = 0;
   age = yo;
 }
 
+//méthodes
 void Oxymeter::setMaxValue(){
   maxValue = 206.9 - 0.67*age;
-  Serial.print("Max value : ");
-  Serial.println(maxValue);
 }
 
-void Oxymeter::setAge(float yo){
+void Oxymeter::setAge(int yo){
   age = yo;
   maxValue = 206.9 - 0.67*age;
-  Serial.print("Max value : ");
-  Serial.println(maxValue);
 }
 
-float Oxymeter::getAge(){
+int Oxymeter::getAge(){
   return age;
+}
+
+void Oxymeter::setAgeDiz(int yoD){
+  ageDiz = yoD;
+}
+
+int Oxymeter::getAgeDiz(){
+  return ageDiz;
+}
+
+void Oxymeter::setAgeUnit(int yoU){
+  ageUnit = yoU;
+}
+
+int Oxymeter::getAgeUnit(){
+  return ageUnit;
+}
+
+void Oxymeter::calculateAge(){
+  age = ageDiz*10+ageUnit;
+  maxValue = 206.9 - 0.67*age;
 }
     
 void Oxymeter::setUp(){
-  Serial.begin(9600);
+  /*Serial.begin(9600);
   while(age<10 || age>100)
   {
     int l=0;
@@ -53,12 +76,10 @@ void Oxymeter::setUp(){
       delay(15);
     }
     age=atof(tampon);
-  }
+  }*/
 }
     
 float Oxymeter::getValue(){
-  Serial.print("BPM : ");
-  Serial.println(analogRead(numPort));
   return analogRead(numPort);
 }
 

@@ -2,7 +2,6 @@
 #define SENSOR_H
 
 #include <Arduino.h>
-using namespace std;
 
 class Sensor {
 
@@ -18,11 +17,9 @@ public:
 
     //constructeurs
     Sensor();
-
     Sensor(bool stateRisk, bool stateWarning, float min, float max, int port);
 
-    //fonctions annexes 
-
+    //méthodes
     void setAtRisk(bool state);
     void setWarning(bool state);
 
@@ -34,8 +31,6 @@ public:
     virtual void setUp() = 0;
     virtual float getValue()=0;
     virtual void isAtRisk(float value) = 0;
-    //destructeur
-
 };
 
 #endif

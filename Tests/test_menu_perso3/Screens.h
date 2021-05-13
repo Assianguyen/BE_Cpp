@@ -43,6 +43,18 @@ const int prevAlarmHelp = 3;
 
 const int nbGoodbyeItems = 11;
 
+static const char* NUMBERS[] = {
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9"
+};
 
 //Welcome screen
 static const char* WELCOME[] = {
@@ -95,7 +107,7 @@ static const char* MONITORING_ITEMS[] = {
   "        .. degC",
   "Motion sensor:",
   "         no risk",
-  "",
+  "Age :",
   " Call for help! ",
   "    Settings    ",
   "    Turn off    "

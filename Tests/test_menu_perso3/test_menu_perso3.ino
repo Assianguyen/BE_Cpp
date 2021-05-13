@@ -21,6 +21,8 @@ const int nSettings = 4;
 const int nYesNo = 5;
 const int nAlarm = 6;
 const int nAlarmHelp = 7;
+
+const char** n = NUMBERS;
  
 //U8G2_SH1107_SEEED_128X128_1_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
 
@@ -39,8 +41,8 @@ static byte pressedSelect = 0;
 static byte pressedReturn = 0;
 static int nonePressed = 1;
 
-Menu welcome = Menu("     Welcome    ", WELCOME, nbWelcomeItems);
-Menu goodbye = Menu("     Goodbye    ", GOODBYE, nbGoodbyeItems);
+Menu welcome = Menu(WELCOME, nbWelcomeItems);
+Menu goodbye = Menu(GOODBYE, nbGoodbyeItems);
 Menu ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, nbAgeMenuItems, firstAge, lastAge, prevAgeMenu, &doAgeMenuAction);
 Menu subAgeMenu = Menu("     Select:    ", SUB_AGE_ITEMS, nbSubAgeItems, firstSubAge, lastSubAge, prevSubAge, &doSubAgeAction);
 Menu monitoring = Menu("HealthMonitoring",MONITORING_ITEMS, nbMonitoringItems, firstMonitoring, lastMonitoring, prevMonitoring, &doMonitoringAction);
@@ -90,22 +92,11 @@ void checkButton(){
     if(cursorPosition>=getActualMenu().getFirst()){
       cursorPosition--; 
       nonePressed = 0;
-//      do{
-//        u8g2.setDrawColor(1);
-//        u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
-//        u8g2.setDrawColor(2);
-//      } while( u8g2.nextPage() );     
     }
   } else if(pressedDown == HIGH){
     if(cursorPosition<=getActualMenu().getLast()){
       cursorPosition++;  
-      nonePressed = 0;
-//      do{
-//        u8g2.setDrawColor(1);
-//        u8g2.drawBox(0, (cursorPosition+1)*10, 140, 20);
-//        u8g2.setDrawColor(2);
-//        u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
-//      } while( u8g2.nextPage() );   
+      nonePressed = 0;  
     }
   } else if(pressedSelect == HIGH){
     getActualMenu().getCallbackFnct(cursorPosition);
@@ -120,15 +111,12 @@ void checkButton(){
 }
 
 void updateMenu(){
- 
-// do{
-//  u8g2.setDrawColor(1);
-//  u8g2.drawBox(0, (cursorPosition+1)*10, 140, 10);
-//  u8g2.setDrawColor(2);
-  //u8g2.drawStr(0, (cursorPosition+2)*10, getActualMenu().getSelectedItem(cursorPosition)); 
-//  } while( u8g2.nextPage() );
+  if (actualMenu == nMonitoring){
+    getActualMenu().displayMenuM(cursorPosition, age_diz, age_unit, n);
+  } else {
+    getActualMenu().displayMenu(cursorPosition);
+  }
   getActualMenu().displayMenu(cursorPosition);
-  //Serial.println("Age : "+age);
 }
 
 Menu getActualMenu(){

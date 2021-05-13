@@ -1,6 +1,7 @@
 #include "Temperature.h"
 #include <math.h>
 
+//constructeurs
 Temperature::Temperature()
 {
   atRisk = false;
@@ -21,6 +22,7 @@ Temperature::Temperature(bool stateRisk, bool stateWarning, float min, float war
   numPort = port;
 }
 
+//méthodes
 void Temperature::setUp(){
    Serial.begin(9600);
 }
@@ -32,17 +34,15 @@ float Temperature::getValue(){
   float R1=1023.0/data-1.0;
   R1=R*R1;
   float temperature=1.0/(log(R1/R)/B+1/298.15)-273.15; //conversion en T°
-  Serial.print(temperature);
-  Serial.println("degres");
+  //Serial.print(temperature);
+  //Serial.println("degres");
   return temperature;
 }
 
 void Temperature::isAtRisk(float value){
-  if((value >= warningTemp) && (value < maxValue))
-  {
+  if((value >= warningTemp) && (value < maxValue)) {
     warning = true;
-  } else if((value >= maxValue) || (value < minValue))
-  {
+  } else if((value >= maxValue) || (value < minValue)) {
     atRisk = true;
   } else {
     atRisk = false;

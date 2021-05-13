@@ -2,33 +2,27 @@
 #define SWITCH_H
 
 #include <Arduino.h>
-#include "Actuator.h"
 
-class Switch : public Actuator {
+class Switch {
 
 friend class Monitoring;
 
 protected:
-
+  int numPort;
   bool isOn;
 
 public:
 
 	//constructeur
-
 	Switch();
-
 	Switch(bool state, int port);
 
-	//fonctions annexes
-
+	//méthodes
 	void setSwitchOn(bool state);
 	bool isSwitchOn();
-  //pour touch sensor
-
+  
   bool getValue();
-
-  virtual void setUp();
+  void setUp();
   
 
 };

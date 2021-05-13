@@ -1,5 +1,6 @@
 #include "Switch.h"
 
+//constructeurs
 Switch::Switch()
 {
 	isOn = false;
@@ -11,6 +12,7 @@ Switch::Switch(bool state, int port)
   numPort=port;
 }
 
+//méthodes
 void Switch::setSwitchOn(bool state)
 {
 	isOn = state;
@@ -20,22 +22,18 @@ bool Switch::isSwitchOn()
 {
 	return isOn;
 }
+
 bool Switch::getValue()
 {
   int touchValue = digitalRead(numPort);
-  if (touchValue == HIGH)
-  {
+  if (touchValue == HIGH) {
     return true;
-  }
-  else
-  {
+  } else {
     return false;
   } 
 }
 
 void Switch::setUp()
 {
-
-  //Serial.begin(9600); 
   pinMode(numPort,INPUT);
 }

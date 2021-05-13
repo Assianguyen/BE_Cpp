@@ -16,12 +16,12 @@ public:
 
     //constructeurs
     Temperature();
-
     Temperature(bool stateRisk, bool stateWarning, float min, float warnTemp, float max, int port);
+
+    //méthodes
     virtual void setUp();
     virtual float getValue(); 
     virtual void isAtRisk(float value);
-    
 };
 
 #endif

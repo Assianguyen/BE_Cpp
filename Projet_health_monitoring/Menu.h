@@ -5,11 +5,13 @@
 #include <U8g2lib.h>
 #include <SPI.h>
 #include <Wire.h>
-using namespace std;
+#include "Screens.h"
 
 extern U8G2_SH1107_SEEED_128X128_1_SW_I2C u8g2;
 
 class Menu {
+
+  friend class Monitoring;
 
 protected :
     const char* prompt;     // Titre du menu
@@ -17,37 +19,29 @@ protected :
     int nbItems;  // Nombre de choix possibles
     int firstChoice;
     int lastChoice;
-    int prevMenu;
     void (*callbackFnct)(int menuItemSelected); // Pointeur sur fonction pour gérer le choix de l'utilisateur
 
 public :
+
   //constructeurs
-  //Menu();
+  Menu();
   Menu(const char** choix, int nbChoix);
-  Menu(const char* nom, const char** choix, int nbChoix, int first, int last, int prev, void (*function)(int selection));
+  Menu(const char* nom, const char** choix, int nbChoix, int first, int last, void (*function)(int selection));
 
   //methodes
-  const char *getPrompt();
-
-  const char *getSelectedItem(int selectedItem);
-
-  const char **getItems();
-
-  int getNbItems();
-
-  int getLast();
+  void setUp();
   
+  const char *getPrompt();
+  const char *getSelectedItem(int selectedItem);
+  const char **getItems();
+  int getNbItems();
+  int getLast();
   int getFirst();
-
-  int getPrev();
-
   void  getCallbackFnct(int selectedItem);
 
   void displayScreen();
-
   void displayMenu(int cursorP);
-
-  void displayMenuM(int cursorP, int ageD, int ageU, char** num);
+  void displayMenuM(int cursorP, int ageD, int ageU);
 };
  
 #endif /* MENU_H_ */
