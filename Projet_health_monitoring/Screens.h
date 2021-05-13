@@ -43,12 +43,12 @@ const int nbSettingsItems = 11;
 const int firstSettings = 5;
 const int lastSettings = 6;
 //const int prevSettings = 3;
-/*
+
 const int nbYesNoItems = 11;
 const int firstYesNo = 5;
 const int lastYesNo = 6;
-const int prevYesNo = 4;
-*/
+///const int prevYesNo = 4;
+
 const int nbAlarmItems = 11;
 const int firstAlarm = 10;
 const int lastAlarm = 10;
@@ -227,7 +227,7 @@ static const char* SETTINGS_ITEMS[] = {
   ""
 };
 
-/* 
+
 static const char* YES_NO_ITEMS[] = {
   "",
   "",
@@ -240,7 +240,7 @@ static const char* YES_NO_ITEMS[] = {
   "",
   "",
   ""
-};*/
+};
 
 /* Goodbye screen */
 static const char* GOODBYE[] = {

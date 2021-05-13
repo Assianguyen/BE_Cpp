@@ -18,32 +18,36 @@ int Monitoring::cursorPosition = firstAge;
 byte Monitoring::pressedUp = 0;
 byte Monitoring::pressedDown = 0;
 byte Monitoring::pressedSelect = 0;
+//byte Monitoring::pressedOnOff = 0;
 int Monitoring::nonePressed = 1;
 Monitoring* Monitoring::This = 0;
 
-//Led Monitoring::led1 = Led(false,D3); //objet LED
-//Buzzer Monitoring::buzzer1 = Buzzer(false,D7);
-//Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
+Led Monitoring::led1 = Led(false,0); //objet LED
+Buzzer Monitoring::buzzer1 = Buzzer(false,2);
+Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
 
-Led Monitoring::led1 = Led(false,9); //objet LED
-Buzzer Monitoring::buzzer1 = Buzzer(false,10);
-Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0);
+//Led Monitoring::led1 = Led(false,9); //objet LED
+//Buzzer Monitoring::buzzer1 = Buzzer(false,10);
+//Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0);
 Sms Monitoring::message = Sms(80);
+
+//Menu Monitoring::goodbye = Menu(GOODBYE, nbGoodbyeItems);
 
 Monitoring::Monitoring(){
 //    led1 = Led(false,D3);
 //    buzzer1 = Buzzer(false,D7);
-//    upButton = Switch(false,D4);
-//    downButton = Switch(false,D6);
-//    selectButton = Switch(false,D5);
+      upButton = Switch(false,12);
+      downButton = Switch(false,15);
+      selectButton = Switch(false,13);
+     // onOffButton = Switch(false,14);
 //    temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
 //    oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
 //    led1 = Led(false,9);
 //    buzzer1 = Buzzer(false,10);
     This = this;
-    upButton = Switch(false,8);
-    downButton = Switch(false,6);
-    selectButton = Switch(false,7);
+    //upButton = Switch(false,8);
+    //downButton = Switch(false,6);
+    //selectButton = Switch(false,7);
     //message=Sms(80);
     temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
     //oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
@@ -53,7 +57,7 @@ Monitoring::Monitoring(){
     subAgeMenu = Menu("     Select:    ", SUB_AGE_ITEMS, nbSubAgeItems, firstSubAge, lastSubAge, &doSubAgeAction);
     monitoring = Menu("HealthMonitoring",MONITORING_ITEMS, nbMonitoringItems, firstMonitoring, lastMonitoring, &doMonitoringAction);
     settings = Menu("    Settings    ", SETTINGS_ITEMS, nbSettingsItems, firstSettings, lastSettings, &doSettingsAction);
-    //yesNo = Menu(" Are you sure ? ", YES_NO_ITEMS, nbYesNoItems, firstYesNo, lastYesNo, &doYesNoAction);
+    //yesNo = Menu("   Turn off ?   ", YES_NO_ITEMS, nbYesNoItems, firstYesNo, lastYesNo, &doYesNoAction);
     alarm = Menu(" Alarm activated", ALARM_ITEMS, nbAlarmItems, firstAlarm, lastAlarm, &doAlarmAction);
     alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, nbAlarmHelpItems, firstAlarmHelp, lastAlarmHelp, &doAlarmHelpAction);
 }
@@ -83,6 +87,7 @@ void Monitoring::setUpMonitoring(){
   upButton.setUp();
   downButton.setUp();
   selectButton.setUp();
+  //onOffButton.setUp();
   message.setUp();
   //temp1.setUp();
   //oxy1.setUp();
@@ -100,8 +105,12 @@ void Monitoring::startMonitoring()
   pressedUp = upButton.getValue();
   pressedDown = downButton.getValue();
   pressedSelect = selectButton.getValue();
+//  pressedOnOff = onOffButton.getValue();
 
-  if(pressedUp == HIGH){
+  /*if(pressedOnOff == HIGH){
+    //actualMenu = nYesNo;
+    nonePressed = 0;
+  } else*/ if(pressedUp == HIGH){
     if(cursorPosition>this->getActualMenu().getFirst()){
       cursorPosition--; 
       nonePressed = 0;   
@@ -121,8 +130,8 @@ void Monitoring::startMonitoring()
   //fonction updateMenu
   u8g2.firstPage();  
   if (actualMenu == nMonitoring){
-    //this->getActualMenu().displayMenuM(cursorPosition, age_diz, age_unit);
     this->getActualMenu().displayMenuM(cursorPosition, oxy1.getAgeDiz(), oxy1.getAgeUnit());
+    //this->getActualMenu().displayMenuM(cursorPosition, oxy1.getAgeDiz(), oxy1.getAgeUnit(), temp1.getValue());
   } else {
     this->getActualMenu().displayMenu(cursorPosition);
   }
@@ -162,9 +171,9 @@ Menu Monitoring::getActualMenu(){
       case 4:
         return settings;
       break;
-      case 5:
+      /*case 5:
         return yesNo;
-      break;
+      break;*/
       case 6:
         return alarm;
       break;
@@ -466,24 +475,21 @@ void Monitoring::doSettingsAction(int selectedMenuItem) {
  }
 }
 
-/*
 void Monitoring::doYesNoAction(int selectedMenuItem) {
-  int t;
-  Monitoring temp = Monitoring(t);
  switch(selectedMenuItem) {
   case 5:
-    goodbye.displayScreen();
+    //goodbye.displayScreen();
     //delay(2000);
     break;
 
   case 6:
     u8g2.clear();
-    previousMenu = actualMenu;
+    //previousMenu = actualMenu;
     actualMenu = nMonitoring;
-    cursorPosition = temp.getActualMenu().getFirst();
+    cursorPosition = This->getActualMenu().getFirst();
     break;
  }
-}*/
+}
 
 /** Affiche le choix de l'utilisateur */
 void Monitoring::doAlarmAction(int selectedMenuItem) {

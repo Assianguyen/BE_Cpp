@@ -88,6 +88,7 @@ void Menu::displayMenu(int cursorP) {
 void Menu::displayMenuM(int cursorP, int ageD, int ageU) {
    //const char *num[] =  {"0","1","2","3","4","5","6","7","8","9"};
    const char** n = NUMBERS;
+   //char t= temp;
    do {
     u8g2.setFontMode(1);
     u8g2.setDrawColor(1);
@@ -97,6 +98,10 @@ void Menu::displayMenuM(int cursorP, int ageD, int ageU) {
     u8g2.drawStr(0,10,prompt);
     u8g2.drawStr(60,80, n[ageD]);
     u8g2.drawStr(70,80,n[ageU]);
+/*enum {BufSize=9}; // If a is short use a smaller number, eg 5 or 6 
+char buf[BufSize];
+snprintf (buf, BufSize, "%d", a);
+u8g.drawStr(33, 33, buf);*/
     for (int i = 0; i < nbItems; i++){
       u8g2.drawStr(0,((i+2)*10),items[i]);
     }    
