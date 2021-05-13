@@ -17,11 +17,11 @@ class Monitoring {
 	
 protected :
 
-  
+  /*
   static int age;
   static int age_diz;
   static int age_unit;
-    
+   */ 
   static int selectedOption;
   static int actualMenu;
   static int previousMenu;
@@ -31,6 +31,7 @@ protected :
   static byte pressedDown;
   static byte pressedSelect;
   static byte pressedReturn;
+  //static byte pressedOnOff;
   static int nonePressed; 
 
   static Led led1; //objet LED
@@ -38,17 +39,18 @@ protected :
   Switch upButton;
   Switch downButton;
   Switch selectButton;
+  //Switch onOffButton;
   Temperature temp1;
   static Oxymeter oxy1;
   static Sms message;
   
   Menu welcome;
-  //Menu goodbye;
+  //static Menu goodbye;
   Menu ageMenu;
   Menu subAgeMenu;
   Menu monitoring;
   Menu settings;
-  Menu yesNo;
+  //Menu yesNo;
   Menu alarm;
   Menu alarmHelp;
 
@@ -74,7 +76,7 @@ public :
   static void doSubAgeAction(int selectedMenuItem);
   static void doMonitoringAction(int selectedMenuItem);
   static void doSettingsAction(int selectedMenuItem);
-  //static void doYesNoAction(int selectedMenuItem);
+  static void doYesNoAction(int selectedMenuItem);
   static void doAlarmAction(int selectedMenuItem);
   static void doAlarmHelpAction(int selectedMenuItem);
 };

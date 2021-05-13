@@ -24,7 +24,7 @@ Temperature::Temperature(bool stateRisk, bool stateWarning, float min, float war
 
 //méthodes
 void Temperature::setUp(){
-   Serial.begin(9600);
+   //Serial.begin(9600);
 }
 
 float Temperature::getValue(){
