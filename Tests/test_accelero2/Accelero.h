@@ -16,6 +16,7 @@ class Accelero {
   uint8_t meanValue;
   uint8_t tabRef[lengthTab]; ///< tableau de valeurs d'accélération référence
   static uint8_t sensorAddress; ///< IIC address of the sensor
+  uint8_t tabRef[lengthTab];
 
   public:
 

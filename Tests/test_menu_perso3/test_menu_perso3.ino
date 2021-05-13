@@ -50,24 +50,8 @@ Menu settings = Menu("    Settings    ", SETTINGS_ITEMS, nbSettingsItems, firstS
 Menu yesNo = Menu(" Are you sure ? ", YES_NO_ITEMS, nbYesNoItems, firstYesNo, lastYesNo, prevYesNo, &doYesNoAction);
 Menu alarm = Menu(" Alarm activated", ALARM_ITEMS, nbAlarmItems, firstAlarm, lastAlarm, prevAlarm, &doAlarmAction);
 Menu alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, nbAlarmHelpItems, firstAlarmHelp, lastAlarmHelp, prevAlarmHelp, &doAlarmHelpAction);
-
-//Menu welcome = Menu("     Welcome    ", WELCOME, 11);
-//Menu goodbye = Menu("     Goodbye    ", GOODBYE, 11);
-//Menu ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, 11, 0, 10, &doAgeMenuAction);
-//Menu subAgeMenu = Menu("     Select:    ", SUB_AGE_ITEMS, 10, 0, 9, &doSubAgeAction);
-//Menu monitoring = Menu("HealthMonitoring",MONITORING_ITEMS, 10, 7, 9, &doMonitoringAction);
-//Menu settings = Menu("    Settings    ", SETTINGS_ITEMS, 11, 5, 5, &doSettingsAction);
-//Menu yesNo = Menu(" Are you sure ? ", YES_NO_ITEMS, 11, 5, 6, &doYesNoAction);
-//Menu alarm = Menu(" Alarm activated", ALARM_ITEMS, 11, 10, 10, &doAlarmAction);
-//Menu alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, 11, 10, 10, &doAlarmHelpAction);
   
-void setup() {
-  
-  //begin(uint8_t menu_select_pin, uint8_t menu_next_pin, uint8_t menu_prev_pin, uint8_t menu_up_pin, uint8_t menu_down_pin, uint8_t menu_home_pin)
-  //u8g2.begin(7, U8X8_PIN_NONE, U8X8_PIN_NONE, 8, 6, U8X8_PIN_NONE);
-  //Serial.begin(9600); 
-  //Serial.println("Setup");
-  
+void setup() {  
   u8g2.begin();
   u8g2.setFont(u8g2_font_pressstart2p_8f);
   u8g2.firstPage();

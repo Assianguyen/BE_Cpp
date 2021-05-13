@@ -1,11 +1,10 @@
 #include "Accelero.h"
 #include <Wire.h>
-#include <cstdlib>
+//#include <cstdlib>
 #include <Arduino.h>
 
 
 uint8_t Accelero::sensorAddress = 0x18; //  0x18
-
 Accelero::Accelero(){
   isFalling=false;
   currentValue=0;
