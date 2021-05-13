@@ -89,7 +89,7 @@ void DFRobot_Heartrate::minNumber(uint8_t count)
 		}else{
 			temp2 = (count-1)-i;
 		}		
-		if(value[temp1]>=value[temp2])return;
+		if(value[temp1]>=value[temp2])return(0);
 	}
 	valueFlag = 0;
 	
@@ -121,7 +121,7 @@ uint16_t DFRobot_Heartrate::analogGetRate(void)
             if(timeFlag > 9)timeFlag=0;
         }       
         if(0 == sampleTime[9]){
-            Serial.println("Wait for valid data !"); 
+            Serial.println("Wait for valid data first !"); 
             return(0);
         }
         		
@@ -140,7 +140,7 @@ uint16_t DFRobot_Heartrate::analogGetRate(void)
             }            
         }   
 		if((Arrange[7]-Arrange[3])>150){
-            Serial.println("Wait for valid data !");  
+            Serial.println("Wait for valid data second!");  
 			return(0);
 		}	
         

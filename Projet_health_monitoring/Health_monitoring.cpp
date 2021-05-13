@@ -43,6 +43,7 @@ Monitoring::Monitoring(){
     upButton = Switch(false,8);
     downButton = Switch(false,6);
     selectButton = Switch(false,7);
+    message=Sms(80);
     temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
     //oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
     welcome = Menu(WELCOME, nbWelcomeItems);
@@ -80,6 +81,7 @@ void Monitoring::setUpMonitoring(){
   upButton.setUp();
   downButton.setUp();
   selectButton.setUp();
+  message.setUp();
   //temp1.setUp();
   //oxy1.setUp();
   u8g2.begin();
@@ -88,6 +90,16 @@ void Monitoring::setUpMonitoring(){
   welcome.displayScreen();
   delay(2000);
   u8g2.clear();
+}
+
+Monitoring::Monitoring(Led lum,Buzzer buzz, Switch bouton,Potentiometer pot, Temperature thermo,Oxymeter oxym, Sms mess){
+    led1=lum;
+    buzzer1=buzz;
+    switch1=bouton;
+    potent1=pot;
+    temp1=thermo;
+    oxy1=oxym;
+    message=mess;
 }
 
 void Monitoring::startMonitoring()
@@ -417,6 +429,7 @@ void Monitoring::doMonitoringAction(int selectedMenuItem) {
  switch(selectedMenuItem) {
   case 8:
   //TURN ON ALARM
+    message.sendEvent("alarm_on");
     led1.turnOn();
     buzzer1.turnOn();
     u8g2.clear();
