@@ -27,8 +27,8 @@ class DFRobot_LIS2DH12 {
 public:
 	static uint8_t sensorAddress; ///< IIC address of the sensor
 	int8_t init(uint8_t range); ///< Initialization function
-	void readXYZ(int16_t&, int16_t&, int16_t&); ///< read x, y, z data
-	void mgScale(int16_t&, int16_t&, int16_t&); ///< transform data to millig
+	void readXYZ(/*int16_t&, int16_t&, */int16_t&); ///< read x, y, z data
+	void mgScale(/*int16_t&, int16_t&, */int16_t&); ///< transform data to millig
   /*!
    *  Through the I2C to specify register read a single data
    */

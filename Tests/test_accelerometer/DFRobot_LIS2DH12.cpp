@@ -32,19 +32,19 @@ int8_t DFRobot_LIS2DH12::init(uint8_t range)
     return ret;
 }
 
-void DFRobot_LIS2DH12::readXYZ(int16_t &x, int16_t &y, int16_t &z) //read x, y, z data
+void DFRobot_LIS2DH12::readXYZ(/*int16_t &x, int16_t &y,*/ int16_t &z) //read x, y, z data
 {
     uint8_t sensorData[6];
     readReg(0xA8, sensorData, 6);
-    x = ((int8_t)sensorData[1])*256+sensorData[0]; //return values
-    y = ((int8_t)sensorData[3])*256+sensorData[2];
+   // x = ((int8_t)sensorData[1])*256+sensorData[0]; //return values
+   // y = ((int8_t)sensorData[3])*256+sensorData[2];
     z = ((int8_t)sensorData[5])*256+sensorData[4];
 }
 
-void DFRobot_LIS2DH12::mgScale(int16_t &x, int16_t &y, int16_t &z)
+void DFRobot_LIS2DH12::mgScale(/*int16_t &x, int16_t &y,*/ int16_t &z)
 {
-    x = (int32_t)x*1000/(1024*mgScaleVel); //transform data to millig, for 2g scale axis*1000/(1024*16),
-    y = (int32_t)y*1000/(1024*mgScaleVel); //for 4g scale axis*1000/(1024*8),
+  //  x = (int32_t)x*1000/(1024*mgScaleVel); //transform data to millig, for 2g scale axis*1000/(1024*16),
+  //  y = (int32_t)y*1000/(1024*mgScaleVel); //for 4g scale axis*1000/(1024*8),
     z = (int32_t)z*1000/(1024*mgScaleVel); //for 8g scale axis*1000/(1024*4)
 }
 

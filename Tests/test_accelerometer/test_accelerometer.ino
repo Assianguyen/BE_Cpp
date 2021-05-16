@@ -52,13 +52,13 @@ void acceleration(void)
   int16_t x, y, z;
 
   delay(100);
-  LIS.readXYZ(x, y, z);
-  LIS.mgScale(x, y, z);
-  Serial.print("Acceleration x: "); //print acceleration
-  Serial.print(x);
+  LIS.readXYZ(/*x, y,*/ z);
+  LIS.mgScale(/*x, y, */z);
+  Serial.print("Acceleration z: "); //print acceleration
+  /*Serial.print(x);
   Serial.print(" mg \ty: ");
   Serial.print(y);
-  Serial.print(" mg \tz: ");
+  Serial.print(" mg \tz: ");*/
   Serial.print(z);
   Serial.println(" mg");
 }
