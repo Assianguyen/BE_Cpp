@@ -8,6 +8,7 @@
 #include "Oxymeter.h"
 #include "Menu.h"
 #include "Sms.h"
+#include "Accelerometer.h"
 
 #include <Arduino.h>
 
@@ -41,6 +42,7 @@ protected :
   Switch selectButton;
   //Switch onOffButton;
   Temperature temp1;
+  Accelerometer accel1;
   static Oxymeter oxy1;
   static Sms message;
   
@@ -60,7 +62,7 @@ public :
 
   //constructeurs
   Monitoring();
-  Monitoring(Led lum,Buzzer buzz, Temperature thermo, Oxymeter oxym, Sms mess);
+  Monitoring(Led lum,Buzzer buzz, Temperature thermo, Oxymeter oxym, Sms mess, Accelerometer accel);
 
   //méthodes
   void setUpMonitoring();

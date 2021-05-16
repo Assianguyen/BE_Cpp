@@ -1,14 +1,31 @@
 #include "Accelero.h"
 #include <Wire.h>
+#include <Arduino.h>
 
 uint8_t Accelero::sensorAddress = 0x18; //	0x18
 int16_t Accelero::meanValue = 0;
 int16_t Accelero::deltaValue = 0;
 
 Accelero::Accelero(){
-  meanValue=0;
+  //meanValue=0;
   isFalling=false;
-  deltaValue=0;
+  //deltaValue=0;
+  sensorAddress=0x18;
+}
+
+
+void Accelero::setUp(){
+  
+  Wire.begin();
+  Serial.begin(115200);
+  while(!Serial);
+  delay(100);
+  
+  while(init() == -1){  //Equipment connection exception or I2C address error
+    Serial.println("No I2C devices found");
+    delay(1000);
+  }
+   
 }
 int8_t Accelero::init()
 {
@@ -24,13 +41,6 @@ int8_t Accelero::init()
     return ret;
 }
 
-void Accelero::readZ(int16_t &z) //read x, y, z data
-{
-    uint8_t sensorData[6];
-    fillTab(0xA8,sensorData,6);
-    z = ((int8_t)sensorData[5])*256+sensorData[4];
-}
-
 int16_t Accelero::getZ(){
     uint8_t sensorData[6];
     fillTab(0xA8,sensorData,6);
@@ -38,24 +48,6 @@ int16_t Accelero::getZ(){
     int16_t z=(int32_t)z1*1000/(1024*2);
     return z;
 }
-void Accelero::mgScale(int16_t &z)
-{
-    z = (int32_t)z*1000/(1024*2); //for 8g scale axis*1000/(1024*4)
-}
-
-uint8_t Accelero::readValue(uint8_t address)
-{
-    uint8_t value;
-    Wire.beginTransmission(sensorAddress);
-    Wire.write(address);
-    Wire.endTransmission();
-    Wire.requestFrom(sensorAddress, (uint8_t)1);
-    value = Wire.read();
-    return value;
-}
-
-
-
 
 void Accelero::fillTab(uint8_t address, uint8_t *value,uint8_t quanity, bool autoIncrement)
 {   
@@ -77,14 +69,6 @@ void Accelero::fillTab(uint8_t address, uint8_t *value,uint8_t quanity, bool aut
         }
     }
     
-}
-
-uint8_t Accelero::writeValue(uint8_t address, uint8_t value)
-{
-    Wire.beginTransmission(sensorAddress);
-    Wire.write(address);
-    Wire.write(value);
-    return Wire.endTransmission(true);
 }
 
 uint8_t Accelero::writeTab(uint8_t address, uint8_t *value, size_t quanity, bool autoIncrement)
@@ -141,7 +125,7 @@ int16_t Accelero::calculateMean(){
   meanValue=sum/50;
   return meanValue;
 }
-
+/*
 
 int16_t Accelero::getMeanValue(){
   return meanValue;
@@ -150,7 +134,7 @@ int16_t Accelero::getMeanValue(){
 int16_t Accelero::getDelta(){
   return deltaValue;
 }
-
+*/
 
 int16_t Accelero::calculateDelta(){
   //deltaValue=meanValue+0.50*meanValue; // arbitraire

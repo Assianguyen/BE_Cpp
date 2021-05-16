@@ -50,6 +50,7 @@ Monitoring::Monitoring(){
     //selectButton = Switch(false,7);
     //message=Sms(80);
     temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
+    accel1=Accelerometer(false, 0x18, 50);
     //oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
     welcome = Menu(WELCOME, nbWelcomeItems);
     //goodbye = Menu(GOODBYE, nbGoodbyeItems);
@@ -62,13 +63,15 @@ Monitoring::Monitoring(){
     alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, nbAlarmHelpItems, firstAlarmHelp, lastAlarmHelp, &doAlarmHelpAction);
 }
 
-Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sms mess){
+Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sms mess, Accelerometer accel){
     This = this;
     led1 = lum;
     buzzer1 = buzz;
     temp1 = thermo;
     oxy1 = oxym;
-    message = mess;/*
+    message = mess;
+    accel1=accel;
+    /*
     welcome = Menu(WELCOME, nbWelcomeItems);
     goodbye = Menu(GOODBYE, nbGoodbyeItems);
     ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, nbAgeMenuItems, firstAge, lastAge, prevAgeMenu, &Monitoring::doAgeMenuAction);
@@ -83,6 +86,7 @@ Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sm
 
 void Monitoring::setUpMonitoring(){
   led1.setUp(); 
+  accel1.setUp();
   buzzer1.setUp();
   upButton.setUp();
   downButton.setUp();
