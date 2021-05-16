@@ -34,7 +34,7 @@ Monitoring::Monitoring(){
      // onOffButton = Switch(false,14);
     This = this;
     temp1 = Temperature(false, false, 0.0,38.0,40.0,A0);
-    
+    accel1=Accelerometer(false, 0x18, 50);
     welcome = Menu(WELCOME, nbWelcomeItems);
     //goodbye = Menu(GOODBYE, nbGoodbyeItems);
     ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, nbAgeMenuItems, firstAge, lastAge, &doAgeMenuAction);
@@ -46,17 +46,19 @@ Monitoring::Monitoring(){
     alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, nbAlarmHelpItems, firstAlarmHelp, lastAlarmHelp, &doAlarmHelpAction);
 }
 
-Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sms mess){
+Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sms mess, Accelerometer accel){
     This = this;
     led1 = lum;
     buzzer1 = buzz;
     temp1 = thermo;
     oxy1 = oxym;
     message = mess;
+    accel1=accel;
 }
 
 void Monitoring::setUpMonitoring(){
   led1.setUp(); 
+  accel1.setUp();
   buzzer1.setUp();
   upButton.setUp();
   downButton.setUp();

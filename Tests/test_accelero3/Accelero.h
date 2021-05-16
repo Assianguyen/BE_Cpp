@@ -18,27 +18,30 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-const int  lengthTab=100;
-
 class Accelero {
- public:
+ protected:
 
   bool isFalling;
-  uint8_t deltaValue;
-  uint8_t currentValue;
-  uint8_t meanValue;
-  uint8_t tabRef[(uint8_t)500]; 
+  static int16_t deltaValue;
+  static int16_t meanValue;
+  static uint8_t sensorAddress; ///< IIC address of the sensor
   
 public:
-	static uint8_t sensorAddress; ///< IIC address of the sensor
+
+  Accelero();
+  Accelero(bool isFalling, uint8_t address);
+	void setUp();
 	int8_t init(); ///< Initialization function
-	void readXYZ(int16_t&); ///< read x, y, z data
-	uint8_t readValue(uint8_t);
-	void fillTab(uint8_t, uint8_t, bool autoIncrement = true);
-	uint8_t writeValue(uint8_t, uint8_t);
+  int16_t getZ();
+	void fillTab(uint8_t, uint8_t *, uint8_t,bool autoIncrement = true);
 	uint8_t writeTab(uint8_t, uint8_t *, size_t, bool autoIncrement = true);
-  void calculateMean();
-  void calculateDelta();
+  //void calculateMean();
+  //void calculateMean(int16_t&);
+  int16_t calculateMean();//THIS ONE WORKS
+  int16_t getMeanValue();
+  //void calculateDelta();
+  int16_t calculateDelta();
+  int16_t getDelta();
   bool detectFall();
 };	
 #endif
