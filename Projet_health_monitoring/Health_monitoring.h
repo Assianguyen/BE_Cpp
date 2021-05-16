@@ -17,11 +17,9 @@ class Monitoring {
 	
 protected :
 
-  /*
-  static int age;
-  static int age_diz;
-  static int age_unit;
-   */ 
+  static unsigned long timeAlarm;
+  static unsigned long timeAlarmHelp;
+
   static int selectedOption;
   static int actualMenu;
   static int previousMenu;

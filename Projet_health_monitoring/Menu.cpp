@@ -63,9 +63,10 @@ void Menu::getCallbackFnct(int selectedItem){
 
 void Menu::displayScreen() {
   do {
-    //u8g2.drawXBM( 0, 0, u8g_logo_width, u8g_logo_height, u8g_logo1_bits);
+    u8g2.setDrawColor(1);
+    u8g2.drawXBM( 50, 0, u8g_logo_width, u8g_logo_height, u8g_logo1_bits);
+    u8g2.setDrawColor(2);
     for (int i = 0; i < nbItems; i++){
-      u8g2.setDrawColor(2);
       u8g2.drawStr(0,((i+5)*10),items[i]);
     }
   } while ( u8g2.nextPage() );
@@ -85,25 +86,23 @@ void Menu::displayMenu(int cursorP) {
     } while ( u8g2.nextPage() );
 }
 
-void Menu::displayMenuM(int cursorP, int ageD, int ageU) {
-   //const char *num[] =  {"0","1","2","3","4","5","6","7","8","9"};
-   const char** n = NUMBERS;
-   //char t= temp;
+void Menu::displayMenuM(int cursorP, int age, int maxBpm, float temp) {
    do {
     u8g2.setFontMode(1);
     u8g2.setDrawColor(1);
     u8g2.drawBox(0, ((cursorP+1)*10)+1, 140, 10);
     u8g2.setFont(u8g2_font_pressstart2p_8f);
     u8g2.setDrawColor(2);
-    u8g2.drawStr(0,10,prompt);
-    u8g2.drawStr(60,80, n[ageD]);
-    u8g2.drawStr(70,80,n[ageU]);
-/*enum {BufSize=9}; // If a is short use a smaller number, eg 5 or 6 
-char buf[BufSize];
-snprintf (buf, BufSize, "%d", a);
-u8g.drawStr(33, 33, buf);*/
+    //u8g2.drawStr(0,10,prompt);
+    u8g2.setCursor(40,70);
+    u8g2.print(age);
+    u8g2.setCursor(70,80);
+    u8g2.print(maxBpm);
+    u8g2.setCursor(70, 40);
+    u8g2.print(temp);
+    u8g2.drawGlyph(110, 40, 0x00ba);
     for (int i = 0; i < nbItems; i++){
-      u8g2.drawStr(0,((i+2)*10),items[i]);
+      u8g2.drawStr(0,((i+1)*10),items[i]);
     }    
     } while ( u8g2.nextPage() );
 }

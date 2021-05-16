@@ -6,7 +6,8 @@ Temperature::Temperature()
 {
   atRisk = false;
   warning = false;
-  minValue = 36.0;
+  //minValue = 36.0;
+  minValue = 0.0;
   warningTemp = 38.0;
   maxValue = 40.0;
   numPort = A0;

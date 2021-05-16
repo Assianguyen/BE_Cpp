@@ -22,7 +22,7 @@ public :
 
     //méthodes
     void setMaxValue();
-
+    
     int getAge();
     void setAge(int yo);
     int getAgeDiz();

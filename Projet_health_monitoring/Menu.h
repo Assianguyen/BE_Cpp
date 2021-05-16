@@ -41,7 +41,7 @@ public :
 
   void displayScreen();
   void displayMenu(int cursorP);
-  void displayMenuM(int cursorP, int ageD, int ageU);
+  void displayMenuM(int cursorP, int age, int maxBpm, float temp);
 };
  
 #endif /* MENU_H_ */

@@ -4,15 +4,13 @@
 #include <SPI.h>
 #include <Wire.h>
 
-//extern U8G2_SH1107_SEEED_128X128_1_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
-/*
-int Monitoring::age = 0;
-int Monitoring::age_diz = 0;
-int Monitoring::age_unit = 0;
-*/
+#define DELAY_10_MIN 600000000
+
+unsigned long Monitoring::timeAlarm = 0;
+unsigned long Monitoring::timeAlarmHelp = 0;
+
 int Monitoring::selectedOption = 0;
 int Monitoring::actualMenu = nAge;
-//int Monitoring::previousMenu = nAge;
 int Monitoring::cursorPosition = firstAge;
 
 byte Monitoring::pressedUp = 0;
@@ -22,35 +20,21 @@ byte Monitoring::pressedSelect = 0;
 int Monitoring::nonePressed = 1;
 Monitoring* Monitoring::This = 0;
 
-Led Monitoring::led1 = Led(false,0); //objet LED
-Buzzer Monitoring::buzzer1 = Buzzer(false,2);
+Led Monitoring::led1 = Led(false,D8); //objet LED
+Buzzer Monitoring::buzzer1 = Buzzer(false,D9);
 Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
-
-//Led Monitoring::led1 = Led(false,9); //objet LED
-//Buzzer Monitoring::buzzer1 = Buzzer(false,10);
-//Oxymeter Monitoring::oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0);
 Sms Monitoring::message = Sms(80);
 
 //Menu Monitoring::goodbye = Menu(GOODBYE, nbGoodbyeItems);
 
 Monitoring::Monitoring(){
-//    led1 = Led(false,D3);
-//    buzzer1 = Buzzer(false,D7);
-      upButton = Switch(false,12);
-      downButton = Switch(false,15);
-      selectButton = Switch(false,13);
+      upButton = Switch(false,D12);
+      selectButton = Switch(false,D11);
+      downButton = Switch(false,D10);
      // onOffButton = Switch(false,14);
-//    temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
-//    oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
-//    led1 = Led(false,9);
-//    buzzer1 = Buzzer(false,10);
     This = this;
-    //upButton = Switch(false,8);
-    //downButton = Switch(false,6);
-    //selectButton = Switch(false,7);
-    //message=Sms(80);
-    temp1 = Temperature(false, false, 36.0,38.0,40.0,A0);
-    //oxy1 = Oxymeter(false,false,55.0, 200.0,A0,0.0);
+    temp1 = Temperature(false, false, 0.0,38.0,40.0,A0);
+    
     welcome = Menu(WELCOME, nbWelcomeItems);
     //goodbye = Menu(GOODBYE, nbGoodbyeItems);
     ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, nbAgeMenuItems, firstAge, lastAge, &doAgeMenuAction);
@@ -68,17 +52,7 @@ Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sm
     buzzer1 = buzz;
     temp1 = thermo;
     oxy1 = oxym;
-    message = mess;/*
-    welcome = Menu(WELCOME, nbWelcomeItems);
-    goodbye = Menu(GOODBYE, nbGoodbyeItems);
-    ageMenu = Menu("Select your age:", AGE_MENU_ITEMS, nbAgeMenuItems, firstAge, lastAge, prevAgeMenu, &Monitoring::doAgeMenuAction);
-    subAgeMenu = Menu("     Select:    ", SUB_AGE_ITEMS, nbSubAgeItems, firstSubAge, lastSubAge, prevSubAge, &Monitoring::doSubAgeAction);
-    monitoring = Menu("HealthMonitoring",MONITORING_ITEMS, nbMonitoringItems, firstMonitoring, lastMonitoring, prevMonitoring, &Monitoring::doMonitoringAction);
-    settings = Menu("    Settings    ", SETTINGS_ITEMS, nbSettingsItems, firstSettings, lastSettings, prevSettings, &Monitoring::doSettingsAction);
-    yesNo = Menu(" Are you sure ? ", YES_NO_ITEMS, nbYesNoItems, firstYesNo, lastYesNo, prevYesNo, &Monitoring::doYesNoAction);
-    alarm = Menu(" Alarm activated", ALARM_ITEMS, nbAlarmItems, firstAlarm, lastAlarm, prevAlarm, &Monitoring::doAlarmAction);
-    alarmHelp = Menu(" Alarm activated", ALARM_HELP_ITEMS, nbAlarmHelpItems, firstAlarmHelp, lastAlarmHelp, prevAlarmHelp, &Monitoring::doAlarmHelpAction);
-*/
+    message = mess;
 }
 
 void Monitoring::setUpMonitoring(){
@@ -130,31 +104,32 @@ void Monitoring::startMonitoring()
   //fonction updateMenu
   u8g2.firstPage();  
   if (actualMenu == nMonitoring){
-    this->getActualMenu().displayMenuM(cursorPosition, oxy1.getAgeDiz(), oxy1.getAgeUnit());
-    //this->getActualMenu().displayMenuM(cursorPosition, oxy1.getAgeDiz(), oxy1.getAgeUnit(), temp1.getValue());
+    this->getActualMenu().displayMenuM(cursorPosition, oxy1.getAge(), oxy1.getMaxValue(), temp1.getValue());
   } else {
     this->getActualMenu().displayMenu(cursorPosition);
-  }
-  
-/*  
+  } 
   temp1.isAtRisk(temp1.getValue());
-  
-  if(temp1.getWarning() || temp1.getAtRisk()){
-    u8g2.clear();
-    previousMenu = actualMenu;
-    actualMenu = nAlarm;
-    cursorPosition = temp.getActualMenu().getFirst();
-    
-    if(temp1.getAtRisk()){
-      u8g2.clear();
-    previousMenu = actualMenu;
-    actualMenu = nAlarmHelp;
-    cursorPosition = temp.getActualMenu().getFirst();
+
+  if((micros()>(timeAlarm+DELAY_10_MIN)) || (timeAlarm == 0)){
+    if(temp1.getWarning()){
+      timeAlarm = micros();
+      actualMenu = nAlarm;
+      cursorPosition = this->getActualMenu().getFirst();
+      led1.turnOn();
+      buzzer1.turnOn();
     }
-    
-  }*/
-  
-  //delay(500);
+  }
+
+  if((micros()>(timeAlarmHelp+DELAY_10_MIN)) || (timeAlarmHelp == 0)){
+    if(temp1.getAtRisk()){
+      timeAlarmHelp = micros();
+      actualMenu = nAlarmHelp;
+      cursorPosition = this->getActualMenu().getFirst();
+      message.sendEvent("alarm_on");
+      led1.turnOn();
+      buzzer1.turnOn();
+    }
+  }
 }
 
 Menu Monitoring::getActualMenu(){
@@ -186,37 +161,7 @@ Menu Monitoring::getActualMenu(){
 void Monitoring::setActualMenu(int actualM){
   actualMenu = actualM;
 }
-/*
-Menu Monitoring::getPreviousMenu(){
-  switch(previousMenu){
-      case 1:
-        return ageMenu;
-      break;
-      case 2:
-        return subAgeMenu;
-      break;
-      case 3:
-        return monitoring;
-      break;
-      case 4:
-        return settings;
-      break;
-      case 5:
-        return yesNo;
-      break;
-      case 6:
-        return alarm;
-      break;
-      case 7:
-        return alarmHelp;
-      break;
-  }
-}
 
-void Monitoring::setPreviousMenu(int previousM){
-  previousMenu = previousM;
-}
-*/
 void Monitoring::doAgeMenuAction(int selectedMenuItem) {
   switch(selectedMenuItem) {
   case 0:
