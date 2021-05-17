@@ -39,7 +39,7 @@ Il y a quatre boutons pour contrôler l'application :
 
 Il faut, en tout premier, configurer l'âge du patient. 
 Ensuite, l'écran de *Monitoring* apparaîtra. A partir de cet écran, plusieurs actions sont possibles :
-1. appeler directement les urgences, / envoyer un SMS à un numéro configuré sur l'applet IFFT -> génération d'un lien à mettre dans sms.h
+1. appeler directement les urgences, / envoyer un SMS à un numéro configuré sur l'applet IFTTT -> génération d'un lien à mettre dans sms.h
 2. aller dans les réglages (pour changer l'âge du patient),
 3. en appuyant sur le bouton on/off, il est possible d'éteindre l'application (et de la rallumer en appuyant sur le même bouton).
 
