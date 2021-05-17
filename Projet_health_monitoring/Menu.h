@@ -42,9 +42,9 @@ class Menu {
     Menu(const char* nom, const char** choix, int nbChoix, int first, int last, void (*function)(int selection));
 
     //méthodes  
-    const char *getPrompt();
-    const char *getSelectedItem(int selectedItem);
-    const char **getItems();
+    const char* getPrompt();
+    const char* getSelectedItem(int selectedItem);
+    const char** getItems();
     int getNbItems();
     int getLast();
     int getFirst();
@@ -53,6 +53,9 @@ class Menu {
     void displayScreen(int nMenu);
     void displayMenu(int cursorP);
     void displayMenuM(int cursorP, int age, int maxBpm, float temp, float accelero);
+
+    //surchage d'opérateur
+    const char* &operator[](int index);
 };
  
 #endif

@@ -18,6 +18,8 @@ Menu::Menu(const char** choix, int nbChoix){
 //constructeur avec tous les arguments
 Menu::Menu(const char* nom, const char** choix, int nbChoix, int first, int last, void (*function)(int selection)){
 	prompt = nom;
+
+ //EXCEPTIONS NBCHOIX >= LASTCHOICE AND FIRSTCHOICE<=LASTCHOICE
   items = choix;
   nbItems = nbChoix;
   firstChoice = first;
@@ -26,15 +28,15 @@ Menu::Menu(const char* nom, const char** choix, int nbChoix, int first, int last
 }
 
 //getters
-const char *Menu::getPrompt(){
+const char* Menu::getPrompt(){
   return prompt;
 }
 
-const char *Menu::getSelectedItem(int selectedItem){
+const char* Menu::getSelectedItem(int selectedItem){
   return items[selectedItem];
 }
 
-const char **Menu::getItems(){
+const char** Menu::getItems(){
   return items;
 }
 
@@ -156,4 +158,14 @@ void Menu::displayMenuM(int cursorP, int age, int maxBpm, float temp, float acce
       u8g2.drawStr(0,((i + 1) * 10), items[i]);
     }    
   }while (u8g2.nextPage());
+}
+
+//surchage de l'opérateur []
+const char* &Menu::operator[](int index){
+  if(index > nbItems){
+    //EXCEPTION SUR INDEX
+    return items[0];
+  }else{
+    return items[index];
+  }
 }
