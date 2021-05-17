@@ -44,7 +44,7 @@ Ensuite, l'écran de *Monitoring* apparaîtra. A partir de cet écran, plusieurs
 3. en appuyant sur le bouton on/off, il est possible d'éteindre l'application (et de la rallumer en appuyant sur le même bouton).
 
 Si plusieurs boutons sont appuyés en même temps, la priorité des actions se fait dans cet ordre: 
-1) ON/OFF 2) Sélectionner 3) Descender 4) Monter 
+1) ON/OFF 2) Sélectionner 3) Descendre 4) Monter 
 
 Pendant le *Monitoring*, l'application récupère la température et l'accélération du patient. Plusieurs cas sont possibles :
 1. La température monte entre 38° et 40°, une alarme sonne sans appeler les urgences (cette alarme ne peut se réactiver que 10 min après avoir été désactivée),
