@@ -2,17 +2,19 @@
 #define TEMPERATURE_H
 
 #include <Arduino.h>
+#include <math.h>
 #include "Sensor.h"
 
-class Temperature : public Sensor {
+class Temperature : public Sensor{
 
   friend class Monitoring;
   
-protected:
+  protected:
 
-  float warningTemp;
+    //température d'alerte
+    float warningTemp;
 
-public:
+  public:
 
     //constructeurs
     Temperature();

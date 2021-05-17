@@ -1,14 +1,13 @@
 #ifndef BUZZER_H
 #define BUZZER_H
 
-#include <Arduino.h>
 #include "Alarm.h"
 
 class Buzzer : public Alarm {
 
   friend class Monitoring;
-
-public:
+  
+  public:
 
     //constructeurs
     Buzzer();

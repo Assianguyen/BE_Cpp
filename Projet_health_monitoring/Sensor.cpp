@@ -1,16 +1,14 @@
 #include "Sensor.h"
-#include <limits.h>
 
-//constructeurs
-Sensor::Sensor()
-{
+//constructeur vide
+Sensor::Sensor(){
 	atRisk = false;
 	minValue = 0.0;
 	maxValue = 0.0;
 }
 
-Sensor::Sensor(bool stateRisk, bool stateWarning, float min, float max, int port)
-{
+//constructeur avec attributs
+Sensor::Sensor(bool stateRisk, bool stateWarning, float min, float max, int port){
 	atRisk = stateRisk;
   warning = stateWarning;
 	minValue = min;
@@ -18,33 +16,28 @@ Sensor::Sensor(bool stateRisk, bool stateWarning, float min, float max, int port
  numPort = port;
 }
 
-//méthodes
-void Sensor::setAtRisk(bool state)
-{
-	atRisk = state;
+//setters
+void Sensor::setAtRisk(bool state){
+  atRisk = state;
 }
 
-void Sensor::setWarning(bool state)
-{
+void Sensor::setWarning(bool state){
   warning = state;
 }
 
-float Sensor::getMinValue()
-{
+//getters
+float Sensor::getMinValue(){
 	return minValue;
 }
 
-float Sensor::getMaxValue()
-{
+float Sensor::getMaxValue(){
 	return maxValue;
 }
 
-bool Sensor::getAtRisk()
-{
+bool Sensor::getAtRisk(){
   return atRisk;
 }
 
-bool Sensor::getWarning()
-{
+bool Sensor::getWarning(){
   return warning;
 }

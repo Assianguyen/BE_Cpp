@@ -96,7 +96,7 @@ void checkButton(){
 
 void updateMenu(){
   if (actualMenu == nMonitoring){
-    getActualMenu().displayMenuM(cursorPosition, age_diz, age_unit, n);
+    getActualMenu().displayMenuM(cursorPosition, age_diz, age_unit);
   } else {
     getActualMenu().displayMenu(cursorPosition);
   }

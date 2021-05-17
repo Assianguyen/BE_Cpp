@@ -6,6 +6,7 @@
 
 class Potentiometer : public Actuator {
 
+friend class Monitoring;
 protected :
 
 	int intensity;
@@ -16,13 +17,15 @@ public :
 
 	Potentiometer();
 
-	Potentiometer(int level);
+	Potentiometer(int level, int port);
 
 	//fonctions annexes
 
 	void setIntensity(int level);
 
 	int getIntensity();
+
+  virtual void setUp();
 
 };
 

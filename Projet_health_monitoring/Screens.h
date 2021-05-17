@@ -1,20 +1,23 @@
 #ifndef SCREENS_H
 #define SCREENS_H
 
+//hauteur et largeur du logo
 #define u8g_logo_width 32
 #define u8g_logo_height 32
 
 #include <Arduino.h>
 
-//constantes de display des menus
-/*
-const int selectPin = 7;
-const int upPin  = 8;
-const int downPin = 6;
-const int returnPin = 5;
-const int ledPin = 9;
-const int buzzerPin = 10;*/
+//numéro des pins des objets
+const int ledPin = D8;
+const int buzzerPin = D2;
+const int oxyPin = A0;
+const int upPin  = D12;
+const int selectPin = D11;
+const int downPin = D10;
+const int onOffPin = D6;
+const int tempPin  = A0;
 
+//numéro des menus
 const int nAge = 1;
 const int nSubAge = 2;
 const int nMonitoring = 3;
@@ -22,64 +25,55 @@ const int nSettings = 4;
 const int nYesNo = 5;
 const int nAlarm = 6;
 const int nAlarmHelp = 7;
+const int nBlackScreen = 8;
 
 //constantes des menus
-//const int nbWelcomeItems = 11;
+//welcome menu
 const int nbWelcomeItems = 7;
 
+//age menu
 const int nbAgeMenuItems = 11;
 const int firstAge = 0;
 const int lastAge = 10;
-//const int prevAgeMenu = 3;
 
+//sub age menu
 const int nbSubAgeItems = 10;
 const int firstSubAge = 0;
 const int lastSubAge = 9;
-//const int prevSubAge = 1;
 
-const int nbMonitoringItems = 10;
+//monitoring menu
+const int nbMonitoringItems = 11;
 const int firstMonitoring = 8;
 const int lastMonitoring = 9;
-//const int prevMonitoring = 3;
 
+//settings menu
 const int nbSettingsItems = 11;
 const int firstSettings = 5;
 const int lastSettings = 6;
-//const int prevSettings = 3;
 
+//yes or no menu
 const int nbYesNoItems = 11;
 const int firstYesNo = 5;
 const int lastYesNo = 6;
-///const int prevYesNo = 4;
 
+//alerte menu
 const int nbAlarmItems = 11;
 const int firstAlarm = 10;
 const int lastAlarm = 10;
-//const int prevAlarm = 3;
 
+//alarm menu
 const int nbAlarmHelpItems = 11;
 const int firstAlarmHelp = 10;
 const int lastAlarmHelp = 10;
-//const int prevAlarmHelp = 3;
 
-const int nbGoodbyeItems = 11;
+//goodbye menu
+const int nbGoodbyeItems = 6;
 
-static const char* NUMBERS[] = {
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11"
-};
+//black screen
+const int nbBlackScreenItems = 0;
 
-static unsigned char u8g_logo1_bits[] = {
+//tableau du logo
+static unsigned char u8g_logo_bits[] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
   0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x18, 0x00, 
@@ -95,10 +89,6 @@ static unsigned char u8g_logo1_bits[] = {
 
 //Welcome screen
 static const char* WELCOME[] = {
-  //"      LOGO      ",
-  //"      LOGO      ",
-  //"",
-  //"",
   "   Welcome to   ",
   "   Protech(t)   ",
   "",
@@ -108,7 +98,7 @@ static const char* WELCOME[] = {
   "  Assia Nguyen  "
 };
 
-/* Selection de l'age */
+//age screen
 static const char* AGE_MENU_ITEMS[] = {
   "    10 - 19     ",
   "    20 - 29     ",
@@ -123,6 +113,7 @@ static const char* AGE_MENU_ITEMS[] = {
   "   110 - 119    "
 };
 
+//sub age screen
 static const char* SUB_AGE_ITEMS[] = {
   "       -0       ",
   "       -1       ",
@@ -136,14 +127,14 @@ static const char* SUB_AGE_ITEMS[] = {
   "       -9       "
 };
  
-/* Monitoring menu */
+//monitoring screen
 static const char* MONITORING_ITEMS[] = {
   "HeartRate:",
   "          .. BPM",
   "Temperature:",
   "               C",
   "Motion sensor:",
-  "         no risk",
+  "",
   "Age:",
   "BPM max:",
   "",
@@ -151,7 +142,7 @@ static const char* MONITORING_ITEMS[] = {
   "    Settings    "
 };
 
-/* Alarm without calling for help*/
+//alert screen
 static const char* ALARM_ITEMS[] = {
   "",
   "",
@@ -166,7 +157,7 @@ static const char* ALARM_ITEMS[] = {
   "Deactivate alarm"
 };
 
-/* Alarm calling for help*/
+//alarm screen
 static const char* ALARM_HELP_ITEMS[] = {
   "",
   "",
@@ -181,7 +172,7 @@ static const char* ALARM_HELP_ITEMS[] = {
   "Deactivate alarm"
 };
 
-/* Settings */
+//settings screen
 static const char* SETTINGS_ITEMS[] = {
   "",
   "",
@@ -196,7 +187,7 @@ static const char* SETTINGS_ITEMS[] = {
   ""
 };
 
-
+//yes or no screen
 static const char* YES_NO_ITEMS[] = {
   "",
   "",
@@ -211,19 +202,30 @@ static const char* YES_NO_ITEMS[] = {
   ""
 };
 
-/* Goodbye screen */
+//goodbye screen
 static const char* GOODBYE[] = {
+  "    Goodbye!    ",
   "",
   "",
   "",
   "",
-  "  See you soon  ",
+  "  See you soon  "
+};
+
+//black screen
+static const char* BLACK_SCREEN[] = {
   "",
   "",
   "",
   "",
-  "      LOGO      ",
-  "      LOGO      "
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 };
 
 #endif

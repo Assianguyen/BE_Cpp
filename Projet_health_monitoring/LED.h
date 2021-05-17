@@ -4,11 +4,11 @@
 #include <Arduino.h>
 #include "Alarm.h"
 
-class Led : public Alarm {
+class Led : public Alarm{
 
   friend class Monitoring;
   
-public:
+  public:
 
     //constructeurs
     Led();

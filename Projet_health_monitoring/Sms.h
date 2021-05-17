@@ -2,31 +2,41 @@
 #define SMS_H
 
 #include <Arduino.h>
-
-
-
+#include <Wire.h>
+#include <ESP8266WiFi.h>
 
 // paramètres pour se connecter au Wifi + url
- static const char* ssid = "Livebox-6150";
- static const char* pass = "Knw66jzLxL4dkcEEzL";
- static const char *host = "maker.ifttt.com";
- static const char *privateKey = "KyzwOybgYJBeVvQQD_1IX";
+//à modifier selon le Wifi utilisé
 
+//nom du modem
+static const char* ssid = "Livebox-6150";
 
-class Sms {
-friend class Monitoring;
+//mot de passe
+static const char* pass = "Knw66jzLxL4dkcEEzL";
+
+//site pour l'envoie du message
+static const char *host = "maker.ifttt.com";
+
+//clé privée de l'évènement
+static const char *privateKey = "KyzwOybgYJBeVvQQD_1IX";
+
+class Sms{
   
-protected:
+  friend class Monitoring;
+  
+  protected:
 
-  int httpPort;
+    int httpPort;
 
-public :
+  public :
 
- Sms();
- Sms(int port);
- void setUp();
- void sendEvent(const char *event);
- 
+    //constructeurs
+    Sms();
+    Sms(int port);
 
+    //méthodes
+    void setUp();
+    void sendEvent(const char *event);
 };
+
 #endif

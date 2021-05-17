@@ -7,7 +7,11 @@ class Actuator {
 
 protected:
 
+  int numPort;
+
 public :
+
+ virtual void setUp()=0;
 
 };
 #endif
