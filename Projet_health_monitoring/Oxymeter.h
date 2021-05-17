@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "Sensor.h"
 
-class Oxymeter : public Sensor{
+class Oxymeter : public Sensor {
 
   friend class Monitoring;
   

@@ -55,11 +55,11 @@ void Menu::getCallbackFnct(int selectedItem){
 }
 
 //affiche les écrans de bienvenue (0), de fermeture (1), noir (2)
-void Menu::displayScreen(int nMenu) {
+void Menu::displayScreen(int nMenu){
 
   //affiche l'écran de bienvenue avec le logo
   if(nMenu == 0){
-    do {
+    do{
       
       //logo
       u8g2.setDrawColor(1);
@@ -68,13 +68,13 @@ void Menu::displayScreen(int nMenu) {
       //menu
       u8g2.setDrawColor(2);
       for (int i = 0; i < nbItems; i++){
-        u8g2.drawStr(0,((i+5)*10),items[i]);
+        u8g2.drawStr(0,((i + 5) * 10), items[i]);
       }
-    } while ( u8g2.nextPage() );
+    }while (u8g2.nextPage());
 
   //affiche l'écran de fermeture avec le logo
-  } else if(nMenu == 1){
-    do {
+  }else if(nMenu == 1){
+    do{
 
       //logo
       u8g2.setDrawColor(1);
@@ -83,18 +83,18 @@ void Menu::displayScreen(int nMenu) {
       //menu
       u8g2.setDrawColor(2);
       for (int i = 0; i < nbItems; i++){
-        u8g2.drawStr(0,((i+1)*10),items[i]);
+        u8g2.drawStr(0,((i + 1) * 10), items[i]);
       }
-    } while ( u8g2.nextPage() );
+    }while (u8g2.nextPage());
 
   //affiche l'écran noir
-  } else if(nMenu == 2){
-    do {
+  }else if(nMenu == 2){
+    do{
       u8g2.setDrawColor(2);
       for (int i = 0; i < nbItems; i++){
-      u8g2.drawStr(0,((i+1)*10),items[i]);
+      u8g2.drawStr(0,((i + 1) * 10), items[i]);
       }
-    } while ( u8g2.nextPage() );
+    }while (u8g2.nextPage());
   }  
 }
 
@@ -107,18 +107,18 @@ void Menu::displayMenu(int cursorP){
     //curseur
     u8g2.setFontMode(1);
     u8g2.setDrawColor(1);
-    u8g2.drawBox(0, ((cursorP+1)*10)+1, 140, 10);
+    u8g2.drawBox(0, ((cursorP + 1) * 10) + 1, 140, 10);
 
     //titre
     u8g2.setFont(u8g2_font_pressstart2p_8f);
     u8g2.setDrawColor(2);
-    u8g2.drawStr(0,10,prompt);
+    u8g2.drawStr(0, 10, prompt);
 
     //menu
     for (int i = 0; i < nbItems; i++){
-      u8g2.drawStr(0,((i+2)*10),items[i]);
+      u8g2.drawStr(0,((i + 2) * 10), items[i]);
     }
-  } while ( u8g2.nextPage() );
+  }while (u8g2.nextPage());
 }
 
 //affiche le menu de monitoring
@@ -130,16 +130,16 @@ void Menu::displayMenuM(int cursorP, int age, int maxBpm, float temp, float acce
     //curseur
     u8g2.setFontMode(1);
     u8g2.setDrawColor(1);
-    u8g2.drawBox(0, ((cursorP+1)*10)+1, 140, 10);
+    u8g2.drawBox(0, ((cursorP + 1) * 10) + 1, 140, 10);
 
     //age
     u8g2.setFont(u8g2_font_pressstart2p_8f);
     u8g2.setDrawColor(2);
-    u8g2.setCursor(40,70);
+    u8g2.setCursor(40, 70);
     u8g2.print(age);
 
     //max bpm
-    u8g2.setCursor(70,80);
+    u8g2.setCursor(70, 80);
     u8g2.print(maxBpm);
 
     //température
@@ -153,7 +153,7 @@ void Menu::displayMenuM(int cursorP, int age, int maxBpm, float temp, float acce
 
     //menu
     for (int i = 0; i < nbItems; i++){
-      u8g2.drawStr(0,((i+1)*10),items[i]);
+      u8g2.drawStr(0,((i + 1) * 10), items[i]);
     }    
-  } while ( u8g2.nextPage() );
+  }while (u8g2.nextPage());
 }

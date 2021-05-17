@@ -20,7 +20,7 @@ static const char *host = "maker.ifttt.com";
 //clé privée de l'évènement
 static const char *privateKey = "KyzwOybgYJBeVvQQD_1IX";
 
-class Sms{
+class Sms {
   
   friend class Monitoring;
   

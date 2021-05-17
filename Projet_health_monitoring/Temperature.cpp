@@ -34,14 +34,14 @@ void Temperature::setUp(){
 float Temperature::getValue(){
 
   //lecture de la valeur
-  int data=analogRead(numPort);
+  int data = analogRead(numPort);
 
   //conversion en degrés celsius
-  int B=4275;
-  int R=100000;
-  float R1=1023.0/data-1.0;
-  R1=R*R1;
-  float temperature=1.0/(log(R1/R)/B+1/298.15)-273.15;
+  int B = 4275;
+  int R = 100000;
+  float R1 = 1023.0 / data - 1.0;
+  R1 = R * R1;
+  float temperature = 1.0 / (log(R1 / R)/ B + 1 / 298.15) - 273.15;
   
   return temperature;
 }

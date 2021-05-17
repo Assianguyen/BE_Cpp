@@ -3,25 +3,25 @@
 //constructeur vide
 Buzzer::Buzzer(){
   isOn = false;
-  numPort=0;
+  numPort = 0;
 }
 
 //constructeur avec attributs
-Buzzer::Buzzer(bool state,int port){
+Buzzer::Buzzer(bool state, int port){
   isOn = state;  
-  numPort=port; 
+  numPort = port; 
 }
 
 //allume le buzzer
 void Buzzer::turnOn(){
   digitalWrite(numPort, HIGH);
-  isOn=true; 
+  isOn = true; 
 }
 
 //éteint le buzzer
 void Buzzer::turnOff(){
   digitalWrite(numPort, LOW);
-  isOn=false;
+  isOn = false;
 }
 
 //set up le buzzer et le fait bipper une fois

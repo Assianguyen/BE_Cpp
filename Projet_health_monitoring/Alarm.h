@@ -17,7 +17,7 @@ class Alarm {
 
     //constructeurs
     Alarm();
-    Alarm(bool state,int port);
+    Alarm(bool state, int port);
 
     //méthodes 
     void setState(bool state);

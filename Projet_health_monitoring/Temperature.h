@@ -5,7 +5,7 @@
 #include <math.h>
 #include "Sensor.h"
 
-class Temperature : public Sensor{
+class Temperature : public Sensor {
 
   friend class Monitoring;
   

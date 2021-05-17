@@ -101,6 +101,10 @@ class Monitoring {
     static void doYesNoAction(int selectedMenuItem);
     static void doAlarmAction(int selectedMenuItem);
     static void doAlarmHelpAction(int selectedMenuItem);
+
+    //surchage d'opérateurs
+    Monitoring operator++();
+    Monitoring operator--();
 };
 
 #endif

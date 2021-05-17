@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-class Switch{
+class Switch {
 
   friend class Monitoring;
 

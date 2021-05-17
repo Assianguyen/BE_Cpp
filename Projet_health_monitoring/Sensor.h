@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <limits.h>
 
-class Sensor{
+class Sensor {
 
   protected:
 
@@ -39,7 +39,7 @@ class Sensor{
     bool getWarning();
 
     virtual void setUp() = 0;
-    virtual float getValue()=0;
+    virtual float getValue() = 0;
     virtual void isAtRisk(float value) = 0;
 };
 

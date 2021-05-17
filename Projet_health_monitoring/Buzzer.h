@@ -11,7 +11,7 @@ class Buzzer : public Alarm {
 
     //constructeurs
     Buzzer();
-    Buzzer(bool state,int port);
+    Buzzer(bool state, int port);
     
     //méthodes
     virtual void turnOn();

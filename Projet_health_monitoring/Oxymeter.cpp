@@ -27,7 +27,7 @@ Oxymeter::Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int 
 //setters
 void Oxymeter::setAge(int yo){
   age = yo;
-  maxValue = 206.9 - 0.67*age;
+  maxValue = 206.9 - 0.67 * age;
 }
 
 void Oxymeter::setAgeDiz(int yoD){
@@ -53,8 +53,8 @@ int Oxymeter::getAgeUnit(){
 
 //calcule l'âge et la valeur max de BPM
 void Oxymeter::calculateAge(){
-  age = ageDiz*10+ageUnit;
-  maxValue = 206.9 - 0.67*age;
+  age = ageDiz * 10 + ageUnit;
+  maxValue = 206.9 - 0.67 * age;
 }
 
 //set up de l'oxymètre

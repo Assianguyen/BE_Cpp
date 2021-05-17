@@ -2,12 +2,12 @@
 
 //constructeur vide
 Sms::Sms(){
-  httpPort=0;
+  httpPort = 0;
 }
 
 //constructeur avec attributs
 Sms::Sms(int port){
-  httpPort=port;  
+  httpPort = port;  
 }
 
 //set up des messages

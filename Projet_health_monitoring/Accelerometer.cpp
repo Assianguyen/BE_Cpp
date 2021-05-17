@@ -34,9 +34,9 @@ uint8_t Accelerometer::writeTab(uint8_t address, uint8_t *tabvalue, size_t tabsi
     Wire.write(tabvalue, tabsize);
   }else{
     for(size_t i = 0; i < tabsize; i++){
-      Wire.write(address+i);
+      Wire.write(address + i);
       Wire.write(tabvalue[i]);
-      if( i < (tabsize-1) ){
+      if(i < (tabsize-1)){
         Wire.endTransmission(false);
         Wire.beginTransmission(sensorAddress);
       }
@@ -64,7 +64,7 @@ int8_t Accelerometer::init(){
 }
 
 //crée et remplit un tableau avec les valeurs de l'accélération en x, y et z
-void Accelerometer::fillTab(uint8_t address, uint8_t *tabvalue,uint8_t tabsize, bool autoIncrement){   
+void Accelerometer::fillTab(uint8_t address, uint8_t *tabvalue, uint8_t tabsize, bool autoIncrement){   
   address = 0x80 | address;
   if(autoIncrement){
     Wire.beginTransmission(sensorAddress);
@@ -77,9 +77,9 @@ void Accelerometer::fillTab(uint8_t address, uint8_t *tabvalue,uint8_t tabsize, 
   }else{
     for(uint8_t i = 0; i < tabsize; i++){
       Wire.beginTransmission(sensorAddress);
-      Wire.write(address+i);
+      Wire.write(address + i);
       Wire.endTransmission();
-      Wire.requestFrom(sensorAddress,(uint8_t)1);
+      Wire.requestFrom(sensorAddress, (uint8_t)1);
       tabvalue[i] = Wire.read();
     }
   }  
@@ -88,26 +88,26 @@ void Accelerometer::fillTab(uint8_t address, uint8_t *tabvalue,uint8_t tabsize, 
 //return la valeur (convertie en mg) d'accélération en z
 float Accelerometer::getValue(){
   uint8_t sensorData[6];
-  fillTab(0xA8,sensorData,6);
-  int16_t zBrut = ((int8_t)sensorData[5])*256+sensorData[4];
-  int16_t z=(int32_t)zBrut*1000/(1024*2);
+  fillTab(0xA8, sensorData, 6);
+  int16_t zBrut = ((int8_t)sensorData[5]) * 256 + sensorData[4];
+  int16_t z = (int32_t)zBrut * 1000 / (1024 * 2);
   return z;
 }
 
 //calcule la moyenne d'accélération en z d'un échantillon de taille variable (initialisée à 50)
 int16_t Accelerometer::calculateMean(){
   int16_t meanValue;
-  int16_t sum=0;
+  int16_t sum = 0;
   for (int i = 0; i < nbSample; i++){
-    sum=sum+abs(getValue());
+    sum = sum + abs(getValue());
   }
-  meanValue=sum/nbSample;
+  meanValue = sum/nbSample;
   return meanValue;
 }
 
 //calcule l'écart à partir duquel on considère que le patient est tombé
 int16_t Accelerometer::calculateDelta(){
-  int16_t deltaValue=abs(1.5*calculateMean());
+  int16_t deltaValue = abs(1.5*calculateMean());
   return deltaValue;
 }
 
@@ -115,15 +115,15 @@ int16_t Accelerometer::calculateDelta(){
 void Accelerometer::isAtRisk(float value){
   
   //récupère la current value
-  value=abs(getValue());
+  value = abs(getValue());
   int16_t mean = calculateMean();
 
   //condition de chute : 
   //écart entre la valeur actuelle et la moyenne supérieur à delta, 
   //si la valeur et la moyenne ne sont pas à 0 
-  if((abs(value-mean)>calculateDelta()) && (value != 0) && (mean != 0)){
-    atRisk=true;    
+  if((abs(value-mean) > calculateDelta()) && (value != 0) && (mean != 0)){
+    atRisk = true;    
   }else{
-    atRisk=false;
+    atRisk = false;
   }  
 }

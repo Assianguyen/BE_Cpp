@@ -54,7 +54,7 @@ Monitoring::Monitoring(){
 }
 
 //constructeur avec quelques attributs
-Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo,Oxymeter oxym, Sms mess, Accelerometer accel){
+Monitoring::Monitoring(Led lum,Buzzer buzz, Temperature thermo, Oxymeter oxym, Sms mess, Accelerometer accel){
   This = this;
   
   led = lum;
@@ -134,8 +134,8 @@ void Monitoring::startMonitoring(){
   }else if(pressedDown == HIGH){
 
     //si le curseur n'est pas sur le dernier choix, il descend
-    if(cursorPosition<this->getActualMenu().getLast()){
-      cursorPosition++;  
+    if(cursorPosition < this->getActualMenu().getLast()){
+      cursorPosition++; 
       nonePressed = 0;
     }
 
@@ -143,7 +143,7 @@ void Monitoring::startMonitoring(){
   }else if(pressedUp == HIGH){
 
     //si le curseur n'est pas sur le premier choix, il monte
-    if(cursorPosition>this->getActualMenu().getFirst()){
+    if(cursorPosition > this->getActualMenu().getFirst()){
       cursorPosition--; 
       nonePressed = 0;   
     }
@@ -190,7 +190,7 @@ void Monitoring::startMonitoring(){
     //si la température est inquiétante mais pas alarmante
     //et que c'est la première fois 
     //ou si l'alarme n'a pas sonné depuis plus de 1O min
-    if((micros()>(timeAlarm+DELAY_10_MIN)) || (timeAlarm == 0)){
+    if((micros()>(timeAlarm + DELAY_10_MIN)) || (timeAlarm == 0)){
       if(temp.getWarning()){
 
         //on note l'heure de l'alerte
@@ -209,7 +209,7 @@ void Monitoring::startMonitoring(){
     //si la température est alarmante
     //et que c'est la première fois 
     //ou si l'alarme n'a pas sonné depuis plus de 1O min
-    if((micros()>(timeAlarmHelp+DELAY_10_MIN)) || (timeAlarmHelp == 0)){
+    if((micros() > (timeAlarmHelp + DELAY_10_MIN)) || (timeAlarmHelp == 0)){
       if(temp.getAtRisk()){
 
         //on note l'heure de l'alarme
@@ -240,7 +240,7 @@ void Monitoring::startMonitoring(){
 
     //si on est sur le menu d'alarme après une chute et qu'on ne l'a pas désactivé après 15 secondes
     //on envoie un message aux urgences
-    if((micros()>timeFallen+DELAY_15_SEC) && (actualMenu == nAlarmHelp) && (alarmFallen)){
+    if((micros() > timeFallen + DELAY_15_SEC) && (actualMenu == nAlarmHelp) && (alarmFallen)){
       message.sendEvent("alarm_on");
       alarmFallen = false;
     }
@@ -550,4 +550,15 @@ void Monitoring::doAlarmHelpAction(int selectedMenuItem){
     cursorPosition = This->getActualMenu().getFirst();
     break;
   }
+}
+
+//surchage d'opérateurs
+Monitoring Monitoring::operator++(){
+  cursorPosition++;
+  return (*this);
+}
+
+Monitoring Monitoring::operator--(){
+  cursorPosition--;
+  return (*this);
 }

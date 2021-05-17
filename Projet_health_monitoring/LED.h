@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "Alarm.h"
 
-class Led : public Alarm{
+class Led : public Alarm {
 
   friend class Monitoring;
   
@@ -12,7 +12,7 @@ class Led : public Alarm{
 
     //constructeurs
     Led();
-    Led(bool state,int port);
+    Led(bool state, int port);
     
     //méthodes
     virtual void turnOn();

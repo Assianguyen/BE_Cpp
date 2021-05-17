@@ -7,7 +7,7 @@
 #include <Wire.h>
 #include "Sensor.h"
 
-class Accelerometer : public Sensor{
+class Accelerometer : public Sensor {
 
   friend class Monitoring;
 
@@ -29,7 +29,7 @@ class Accelerometer : public Sensor{
     virtual void setUp();
     uint8_t writeTab(uint8_t, uint8_t *, size_t, bool autoIncrement = true);
     int8_t init();
-    void fillTab(uint8_t, uint8_t *, uint8_t,bool autoIncrement = true); 
+    void fillTab(uint8_t, uint8_t *, uint8_t, bool autoIncrement = true); 
     virtual float getValue();  
     int16_t calculateMean(); 
     int16_t calculateDelta(); 
