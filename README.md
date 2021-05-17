@@ -54,7 +54,9 @@ Pendant le *Monitoring*, l'application récupère la température et l'accélér
 2. la température monte au-dessus de 40° ou descend en-dessous de 36°, une alarme sonne et appelle les urgences (cette alarme ne peut se réactiver que 10 min après avoir été désactivée),
 3. le patient tombe, une alarme sonne et appelle les urgences si elle n'a pas été désactivée au bout de 15 secondes.
 
-## Notes
+## Autre
+
+### Notes
 
 A de rares occasion, la connexion entre la carte Arduino et l'accéléromètre se perd. Si la valeur lue après "Motion sensor" est systématiquement 0 rebrancher l'accéléromètre et si besoin, téléverser à nouveau.
 
