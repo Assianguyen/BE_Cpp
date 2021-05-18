@@ -24,8 +24,11 @@ Pour installer cette application, il suffit :
 1. de télécharger le dossier ***Projet_health_monitoring***,
 2. d'ouvrir le projet dans l'IDE Arduino,
 3. d'entrer le nom de votre modem WiFi et le mot de passe dans la classe **Sms.h**,
-4. de compiler,
-5. de téléverser.
+4. de configurer le numéro de téléphone destinataire du SMS en créant une applet gratuitement sur IFTTT,
+   Pour cela, suivre le tutoriel au lien suivant: https://circuitdigest.com/microcontroller-projects/sending-sms-using-esp8266
+   Après avoir généré une clé liée au trigger de l'évènement de l'appel à l'aide, copier cette clé dans le paramètre *privateKey* dans **Sms.h** 
+6. de compiler,
+7. de téléverser.
 
 Il est possible que l'application ne se lance pas tout de suite après l'avoir téléversée. Il suffit juste de débrancher et rebrancher la carte Arduino de sa source de courant.
 
@@ -39,7 +42,7 @@ Il y a quatre boutons pour contrôler l'application :
 
 Il faut, en tout premier, configurer l'âge du patient. 
 Ensuite, l'écran de *Monitoring* apparaîtra. A partir de cet écran, plusieurs actions sont possibles :
-1. appeler directement les urgences, / envoyer un SMS à un numéro configuré sur l'applet IFTTT -> génération d'un lien à mettre dans sms.h
+1. appeler directement les urgences, (dans notre cas envoyer un SMS au numéro configuré dans **Sms.h**)
 2. aller dans les réglages (pour changer l'âge du patient),
 3. en appuyant sur le bouton on/off, il est possible d'éteindre l'application (et de la rallumer en appuyant sur le même bouton).
 
