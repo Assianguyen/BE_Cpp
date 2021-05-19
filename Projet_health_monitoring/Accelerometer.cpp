@@ -20,7 +20,7 @@ Accelerometer::Accelerometer(bool isFalling, uint8_t address, int echantillon){
 void Accelerometer::setUp(){
   Wire.begin(sensorAddress);
 
-  //Equipment connection exception or I2C address error
+  //Exception de connexion à l'équipement (accéleromètre)ou erreur d'adresse I2C
   while(init() == -1){  
     delay(1000);
   }

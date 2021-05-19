@@ -61,7 +61,7 @@ const int nbAlarmItems = 11;
 const int firstAlarm = 10;
 const int lastAlarm = 10;
 
-//alarm menu
+//alarme menu
 const int nbAlarmHelpItems = 11;
 const int firstAlarmHelp = 10;
 const int lastAlarmHelp = 10;
@@ -69,7 +69,7 @@ const int lastAlarmHelp = 10;
 //goodbye menu
 const int nbGoodbyeItems = 6;
 
-//black screen
+//Ecran noir
 const int nbBlackScreenItems = 0;
 
 //tableau du logo
@@ -87,7 +87,7 @@ static unsigned char u8g_logo_bits[] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
   };
 
-//Welcome screen
+//Ecran d'accueil
 static const char* WELCOME[] = {
   "   Welcome to   ",
   "   Protech(t)   ",
@@ -98,7 +98,7 @@ static const char* WELCOME[] = {
   "  Assia Nguyen  "
 };
 
-//age screen
+//Ecran age
 static const char* AGE_MENU_ITEMS[] = {
   "    10 - 19     ",
   "    20 - 29     ",
@@ -113,7 +113,7 @@ static const char* AGE_MENU_ITEMS[] = {
   "   110 - 119    "
 };
 
-//sub age screen
+//Ecran sub age
 static const char* SUB_AGE_ITEMS[] = {
   "       -0       ",
   "       -1       ",
@@ -127,7 +127,7 @@ static const char* SUB_AGE_ITEMS[] = {
   "       -9       "
 };
  
-//monitoring screen
+//Ecran Monitoring
 static const char* MONITORING_ITEMS[] = {
   "HeartRate:",
   "          .. BPM",
@@ -142,7 +142,7 @@ static const char* MONITORING_ITEMS[] = {
   "    Settings    "
 };
 
-//alert screen
+//Ecran alerte
 static const char* ALARM_ITEMS[] = {
   "",
   "",
@@ -157,7 +157,7 @@ static const char* ALARM_ITEMS[] = {
   "Deactivate alarm"
 };
 
-//alarm screen
+//Ecran alarme
 static const char* ALARM_HELP_ITEMS[] = {
   "",
   "",
@@ -172,7 +172,7 @@ static const char* ALARM_HELP_ITEMS[] = {
   "Deactivate alarm"
 };
 
-//settings screen
+//Ecran settings
 static const char* SETTINGS_ITEMS[] = {
   "",
   "",
@@ -187,7 +187,7 @@ static const char* SETTINGS_ITEMS[] = {
   ""
 };
 
-//yes or no screen
+//Ecran Yes or No
 static const char* YES_NO_ITEMS[] = {
   "",
   "",
@@ -202,7 +202,7 @@ static const char* YES_NO_ITEMS[] = {
   ""
 };
 
-//goodbye screen
+//Ecran d'adieu
 static const char* GOODBYE[] = {
   "    Goodbye!    ",
   "",
@@ -212,7 +212,7 @@ static const char* GOODBYE[] = {
   "  See you soon  "
 };
 
-//black screen
+//Ecran noir
 static const char* BLACK_SCREEN[] = {
   "",
   "",

@@ -62,7 +62,7 @@ void Oxymeter::setUp(){
   //Serial.begin(9600);
 }
 
-//return la valeur de l'oxymètre
+//return la valeur lue par l'oxymètre
 float Oxymeter::getValue(){
   return analogRead(numPort);
 }
