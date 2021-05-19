@@ -1,6 +1,6 @@
 #include "Oxymeter.h"
 
-//constructeurs
+//constructeur vide
 Oxymeter::Oxymeter(){
   atRisk = false;
   warning = false;
@@ -12,6 +12,7 @@ Oxymeter::Oxymeter(){
   age = 0;
 }
 
+//constructeur avec attributs
 Oxymeter::Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int port, int yo){
   atRisk = stateRisk;
   warning = stateWarning;
@@ -23,66 +24,50 @@ Oxymeter::Oxymeter(bool stateRisk, bool stateWarning, float min, float max, int 
   age = yo;
 }
 
-//méthodes
-void Oxymeter::setMaxValue(){
-  maxValue = 206.9 - 0.67*age;
-}
-
+//setters
 void Oxymeter::setAge(int yo){
   age = yo;
-  maxValue = 206.9 - 0.67*age;
-}
-
-int Oxymeter::getAge(){
-  return age;
+  maxValue = 206.9 - 0.67 * age;
 }
 
 void Oxymeter::setAgeDiz(int yoD){
   ageDiz = yoD;
 }
 
-int Oxymeter::getAgeDiz(){
-  return ageDiz;
-}
-
 void Oxymeter::setAgeUnit(int yoU){
   ageUnit = yoU;
+}
+
+//getters
+int Oxymeter::getAge(){
+  return age;
+}
+
+int Oxymeter::getAgeDiz(){
+  return ageDiz;
 }
 
 int Oxymeter::getAgeUnit(){
   return ageUnit;
 }
 
+//calcule l'âge et la valeur max de BPM
 void Oxymeter::calculateAge(){
-  age = ageDiz*10+ageUnit;
-  maxValue = 206.9 - 0.67*age;
+  age = ageDiz * 10 + ageUnit;
+  maxValue = 206.9 - 0.67 * age;
 }
-    
+
+//set up de l'oxymètre
 void Oxymeter::setUp(){
-  /*Serial.begin(9600);
-  while(age<10 || age>100)
-  {
-    int l=0;
-    char tampon[10]="";
-    Serial.println("quel est votre age?");
-    while(!l)
-    {
-      delay(200);
-      l=Serial.available();
-    }
-    for (int i=0;i<l;i++)
-    {
-      tampon[i]=Serial.read();
-      delay(15);
-    }
-    age=atof(tampon);
-  }*/
+  //Serial.begin(9600);
 }
-    
+
+//return la valeur de l'oxymètre
 float Oxymeter::getValue(){
   return analogRead(numPort);
 }
 
+//vérifie les conditions de risques selon les valeurs de l'oxymètre
 void Oxymeter::isAtRisk(float value){
   if((value >= maxValue) || (value <= minValue)){
     atRisk = true;

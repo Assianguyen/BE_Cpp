@@ -1,33 +1,32 @@
 #include "LED.h"
 
-//constructeurs
+//constructeur vide
 Led::Led(){
   isOn = false;
-  numPort=0;
+  numPort = 0;
 }
 
-Led::Led(bool state,int port){
+//constructeur avec attributs
+Led::Led(bool state, int port){
   isOn = state;  
-  numPort=port; 
+  numPort = port; 
 }
 
-//méthodes
-void Led::turnOn()
-{
+//allume la LED
+void Led::turnOn(){
   digitalWrite(numPort, HIGH);
-  isOn=true;
+  isOn = true;
 }
 
-void Led::turnOff()
-{
+//éteint la LED
+void Led::turnOff(){
   digitalWrite(numPort, LOW);
-  isOn=false;
+  isOn = false;
 }
 
-void Led::setUp()
-{
-  pinMode(numPort,OUTPUT);
-  turnOff();
+//set up la LED et la fait clignoter une fois
+void Led::setUp(){
+  pinMode(numPort, OUTPUT);
   turnOn();
   delay(100);
   turnOff();

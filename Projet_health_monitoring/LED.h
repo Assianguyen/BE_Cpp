@@ -8,11 +8,11 @@ class Led : public Alarm {
 
   friend class Monitoring;
   
-public:
+  public:
 
     //constructeurs
     Led();
-    Led(bool state,int port);
+    Led(bool state, int port);
     
     //méthodes
     virtual void turnOn();

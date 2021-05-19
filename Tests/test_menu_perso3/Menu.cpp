@@ -76,7 +76,7 @@ void Menu::displayMenu(int cursorP) {
    } while ( u8g2.nextPage() );
 }
 
-void Menu::displayMenuM(int cursorP, int ageD, int ageU, char** num) {
+void Menu::displayMenuM(int cursorP, int ageD, int ageU) {
    do {
     u8g2.setFontMode(1);
     u8g2.setDrawColor(1);
@@ -84,8 +84,8 @@ void Menu::displayMenuM(int cursorP, int ageD, int ageU, char** num) {
     u8g2.setFont(u8g2_font_pressstart2p_8f);
     u8g2.setDrawColor(2);
     u8g2.drawStr(0,10,prompt);
-    u8g2.drawStr(60,80, num[ageD]);
-    u8g2.drawStr(70,80,num[ageU]);
+    //u8g2.drawStr(60,80, num[ageD]);
+    //u8g2.drawStr(70,80,num[ageU]);
     for (int i = 0; i < nbItems; i++){
       u8g2.drawStr(0,((i+2)*10),items[i]);
     } 

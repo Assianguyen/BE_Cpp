@@ -47,7 +47,7 @@ public :
 
   void displayMenu(int cursorP);
 
-  void displayMenuM(int cursorP, int ageD, int ageU, char** num);
+  void displayMenuM(int cursorP, int ageD, int ageU);
 };
  
 #endif /* MENU_H_ */

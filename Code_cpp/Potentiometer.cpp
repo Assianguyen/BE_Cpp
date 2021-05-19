@@ -2,12 +2,14 @@
 
 Potentiometer::Potentiometer()
 {
-	intensity = 50; //intensité moyenne (à regler selon les valeurs possibles)
+	intensity = 510; //intensitï¿½ moyenne (ï¿½ regler selon les valeurs possibles)
+  numPort=A0;
 }
 
-Potentiometer::Potentiometer(int level)
+Potentiometer::Potentiometer(int level, int port)
 {
 	intensity = level;
+  numPort=port;
 }
 
 void Potentiometer::setIntensity(int level)
@@ -17,5 +19,11 @@ void Potentiometer::setIntensity(int level)
 
 int Potentiometer::getIntensity()
 {
+  intensity=analogRead(numPort);
 	return intensity;
+}
+
+void Potentiometer::setUp()
+{
+  Serial.begin(115200);
 }

@@ -1,11 +1,14 @@
 #include "Health_monitoring.h"
 
-Monitoring monitor = Monitoring();
+//création d'un objet monitor qui contient tous les éléments de notre app (LED, buzzer, etc.)
+Monitoring moniteur = Monitoring();
 
 void setup() {
-  monitor.setUpMonitoring();
+  //set up du moniteur
+  moniteur.setUpMonitoring();
 }
 
 void loop() {
-  monitor.startMonitoring();
+  //fait tourner l'app
+  moniteur.startMonitoring();
 }

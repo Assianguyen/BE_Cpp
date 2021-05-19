@@ -2,18 +2,28 @@
 #define SENSOR_H
 
 #include <Arduino.h>
+#include <limits.h>
 
 class Sensor {
 
-protected:
+  protected:
 
+    //état de risque
     bool atRisk;
+
+    //état d'alerte
     bool warning;
+
+    //valeur max avant risque
     float maxValue;
+
+    //valeur min avant risque
     float minValue;
+
+    //numéro de port
     int numPort;
 
-public:
+  public:
 
     //constructeurs
     Sensor();
@@ -29,7 +39,7 @@ public:
     bool getWarning();
 
     virtual void setUp() = 0;
-    virtual float getValue()=0;
+    virtual float getValue() = 0;
     virtual void isAtRisk(float value) = 0;
 };
 

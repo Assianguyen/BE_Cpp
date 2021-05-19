@@ -5,26 +5,29 @@
 
 class Switch {
 
-friend class Monitoring;
+  friend class Monitoring;
 
-protected:
-  int numPort;
-  bool isOn;
+  protected:
 
-public:
+    //numéro du port
+    int numPort;
 
-	//constructeur
-	Switch();
-	Switch(bool state, int port);
+    //état du switch
+    bool isOn;
 
-	//méthodes
-	void setSwitchOn(bool state);
-	bool isSwitchOn();
-  
-  bool getValue();
-  void setUp();
-  
+  public:
 
+	  //constructeur
+	  Switch();
+	  Switch(bool state, int port);
+
+	  //méthodes
+	  void setSwitchOn(bool state);
+   
+	  bool isSwitchOn();
+    bool getValue();
+    
+    void setUp();
 };
 
 #endif

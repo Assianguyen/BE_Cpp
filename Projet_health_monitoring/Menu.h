@@ -7,41 +7,55 @@
 #include <Wire.h>
 #include "Screens.h"
 
+//définition de l'écran OLED
 extern U8G2_SH1107_SEEED_128X128_1_SW_I2C u8g2;
 
 class Menu {
 
   friend class Monitoring;
 
-protected :
-    const char* prompt;     // Titre du menu
-    const char** items;     // Tableau de choix du menu
-    int nbItems;  // Nombre de choix possibles
+  protected :
+
+    //titre du menu
+    const char* prompt;
+
+    //tableau de choix du menu
+    const char** items;     
+
+    //nombre de choix possibles
+    int nbItems;  
+
+    //numéro du premier choix possible
     int firstChoice;
+
+    //numéro du dernier choix possible
     int lastChoice;
-    void (*callbackFnct)(int menuItemSelected); // Pointeur sur fonction pour gérer le choix de l'utilisateur
 
-public :
+    //pointeur sur la fonction qui gère le choix de l'utilisateur
+    void (*callbackFnct)(int menuItemSelected); 
+    
+  public :
 
-  //constructeurs
-  Menu();
-  Menu(const char** choix, int nbChoix);
-  Menu(const char* nom, const char** choix, int nbChoix, int first, int last, void (*function)(int selection));
+    //constructeurs
+    Menu();
+    Menu(const char** choix, int nbChoix);
+    Menu(const char* nom, const char** choix, int nbChoix, int first, int last, void (*function)(int selection));
 
-  //methodes
-  void setUp();
-  
-  const char *getPrompt();
-  const char *getSelectedItem(int selectedItem);
-  const char **getItems();
-  int getNbItems();
-  int getLast();
-  int getFirst();
-  void  getCallbackFnct(int selectedItem);
+    //méthodes  
+    const char* getPrompt();
+    const char* getSelectedItem(int selectedItem);
+    const char** getItems();
+    int getNbItems();
+    int getLast();
+    int getFirst();
+    void  getCallbackFnct(int selectedItem);
 
-  void displayScreen();
-  void displayMenu(int cursorP);
-  void displayMenuM(int cursorP, int ageD, int ageU);
+    void displayScreen(int nMenu);
+    void displayMenu(int cursorP);
+    void displayMenuM(int cursorP, int age, int maxBpm, float temp, float accelero);
+
+    //surchage d'opérateur
+    const char* &operator[](int index);
 };
  
-#endif /* MENU_H_ */
+#endif

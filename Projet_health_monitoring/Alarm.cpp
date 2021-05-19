@@ -1,29 +1,31 @@
 #include "Alarm.h"
 
-//constructeurs
+//constructeur vide
 Alarm::Alarm(){
   isOn = false;
-  numPort=0;
+  numPort = 0;
 }
 
-Alarm::Alarm(bool state,int port){
+//constructeur avec attributs
+Alarm::Alarm(bool state, int port){
   isOn = state;  
-  numPort=port;
+  numPort = port;
 }
 
-//méthodes
+//setters
 void Alarm::setState(bool state){
 	isOn = state;
 }
 
 void Alarm::setPort(int port){
-  numPort=port;  
+  numPort = port;  
 }
- 
-bool Alarm::getState() {
+
+//getters
+bool Alarm::getState(){
 	return isOn;
 }
 
-int Alarm::getPort() {
+int Alarm::getPort(){
   return numPort;
 }
