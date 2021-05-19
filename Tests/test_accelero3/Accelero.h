@@ -35,12 +35,12 @@ public:
   int16_t getZ();
 	void fillTab(uint8_t, uint8_t *, uint8_t,bool autoIncrement = true);
 	uint8_t writeTab(uint8_t, uint8_t *, size_t, bool autoIncrement = true);
-  //void calculateMean();
+  void calculateMean();
   //void calculateMean(int16_t&);
-  int16_t calculateMean();//THIS ONE WORKS
+  //int16_t calculateMean();//THIS ONE WORKS
   int16_t getMeanValue();
-  //void calculateDelta();
-  int16_t calculateDelta();
+  void calculateDelta();
+  //int16_t calculateDelta();
   int16_t getDelta();
   bool detectFall();
 };	

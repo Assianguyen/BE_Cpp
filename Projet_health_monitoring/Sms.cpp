@@ -24,13 +24,13 @@ void Sms::setUp(){
   }
 }
 
-//envoie du SMS
+//envoi du SMS
 void Sms::sendEvent(const char *event){
   
   //Utilisation de la classe WiFiClient pour créer une connexion TCP
   WiFiClient client;
 
-  //si la connexion a échoué, on arrête
+  //si la connexion a échouée, on arrête
   if (!client.connect(host, httpPort)){
     return;
   }
@@ -41,7 +41,7 @@ void Sms::sendEvent(const char *event){
   url += "/with/key/";
   url += privateKey;
   
-  //envoie de la requête au serveur
+  //envoi de la requête au serveur
   client.print(String("GET ") + url + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" + 
                "Connection: close\r\n\r\n");

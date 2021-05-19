@@ -25,6 +25,8 @@ void Accelero::setUp(){
     Serial.println("No I2C devices found");
     delay(1000);
   }
+  calculateMean();
+  calculateDelta();
    
 }
 int8_t Accelero::init()
@@ -90,17 +92,16 @@ uint8_t Accelero::writeTab(uint8_t address, uint8_t *value, size_t quanity, bool
     }
     return Wire.endTransmission(true);
 }
-/*
+
 
 void Accelero::calculateMean(){
   int16_t sum=0;
   for (int i = 0; i < 50; i++){
-    sum=sum+getZ();
+    sum=sum+abs(getZ());
   }
   meanValue=abs(sum/50);
 }
 
-*/
 /*
 
 void Accelero::calculateMean(int16_t& z){
@@ -115,7 +116,7 @@ void Accelero::calculateMean(int16_t& z){
 */
 
 
-
+/*
 int16_t Accelero::calculateMean(){
   int16_t meanValue;
   int16_t sum=0;
@@ -125,7 +126,7 @@ int16_t Accelero::calculateMean(){
   meanValue=sum/50;
   return meanValue;
 }
-/*
+*/
 
 int16_t Accelero::getMeanValue(){
   return meanValue;
@@ -134,21 +135,21 @@ int16_t Accelero::getMeanValue(){
 int16_t Accelero::getDelta(){
   return deltaValue;
 }
-*/
 
+/*
 int16_t Accelero::calculateDelta(){
   //deltaValue=meanValue+0.50*meanValue; // arbitraire
   deltaValue=abs(calculateMean());
  return deltaValue;
 }
+*/
 
 
-/*
 void Accelero::calculateDelta(){
   deltaValue=meanValue; // arbitraire
 }
-*/
 
+/*
 bool Accelero::detectFall(){
     uint8_t currentValue=abs(getZ());
     if(abs(currentValue-calculateMean())>calculateDelta()){
@@ -159,17 +160,17 @@ bool Accelero::detectFall(){
     return isFalling;
   
 }
+*/
 
-/*
 bool Accelero::detectFall(){
     uint8_t currentValue=abs(getZ());
-    calculateMean();
-    calculateDelta();
-    if(abs(currentValue-meanValue)>deltaValue){
+    if(abs(currentValue-meanValue)>deltaValue && currentValue!=0){
       isFalling=true;    
     }else{
       isFalling=false;
     }
+    calculateMean();
+    calculateDelta();
     return isFalling;
   
-}*/
+}

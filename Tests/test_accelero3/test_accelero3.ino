@@ -25,15 +25,15 @@ void acceleration(void)
   Serial.print("Acceleration z: "); //print acceleration
   Serial.println(LIS.getZ());
   //Serial.println(z);
-  //LIS.calculateMean();
+  LIS.calculateMean();
   Serial.print("Valeur moyenne: "); //print acceleration
-  Serial.println(LIS.calculateMean());
-  //Serial.println(LIS.getMeanValue());
+  //Serial.println(LIS.calculateMean());
+  Serial.println(LIS.getMeanValue());
   
-  //LIS.calculateDelta();
+  LIS.calculateDelta();
   Serial.print("Valeur écart: "); //print acceleration
-  //Serial.println(LIS.getDelta());
-  Serial.println(LIS.calculateDelta());
+  Serial.println(LIS.getDelta());
+  //==Serial.println(LIS.calculateDelta());
   if (LIS.detectFall()){
     Serial.println("Patient has fallen");
     Serial.println("-------------------------------------------------------");
