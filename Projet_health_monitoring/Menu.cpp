@@ -17,14 +17,18 @@ Menu::Menu(const char** choix, int nbChoix){
 
 //constructeur avec tous les arguments
 Menu::Menu(const char* nom, const char** choix, int nbChoix, int first, int last, void (*function)(int selection)){
-	prompt = nom;
 
- //EXCEPTIONS NBCHOIX >= LASTCHOICE AND FIRSTCHOICE<=LASTCHOICE
-  items = choix;
-  nbItems = nbChoix;
-  firstChoice = first;
-  lastChoice = last;
-  callbackFnct = function;
+  //exceptions
+  if((nbChoix < last) || (first > last)){
+    throw std::invalid_argument("Mauvais arguments : nbItems, firstChoice ou lastChoice");
+  }else{
+    prompt = nom;
+    items = choix;
+    nbItems = nbChoix;
+    firstChoice = first;
+    lastChoice = last;
+    callbackFnct = function;
+  }
 }
 
 //getters
@@ -163,8 +167,9 @@ void Menu::displayMenuM(int cursorP, int age, int maxBpm, float temp, float acce
 //surchage de l'opérateur []
 const char* &Menu::operator[](int index){
   if(index > nbItems){
-    //EXCEPTION SUR INDEX
-    return items[0];
+    //exception
+    throw std::out_of_range("L'index est plus grand que la taille du tableau");
+    //return items[0];
   }else{
     return items[index];
   }

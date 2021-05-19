@@ -9,10 +9,12 @@
 //à modifier selon le Wifi utilisé
 
 //nom du modem
-static const char* ssid = "Livebox-6150";
+//static const char* ssid = "Livebox-6150";
+static const char* ssid = "Gathou";
 
 //mot de passe
-static const char* pass = "Knw66jzLxL4dkcEEzL";
+//static const char* pass = "Knw66jzLxL4dkcEEzL";
+static const char* pass = "12345678";
 
 //site pour l'envoie du message
 static const char *host = "maker.ifttt.com";

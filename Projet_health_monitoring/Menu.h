@@ -5,6 +5,8 @@
 #include <U8g2lib.h>
 #include <SPI.h>
 #include <Wire.h>
+#include <stdexcept>
+#include <exception>
 #include "Screens.h"
 
 //définition de l'écran OLED
