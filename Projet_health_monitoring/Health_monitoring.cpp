@@ -111,8 +111,14 @@ void Monitoring::startMonitoring(){
 
       //retourne directement sur l'écran de monitoring
       actualMenu = nMonitoring;
+
+      //réinitialisation des variables d'alarmes et de la position du capteur
       cursorPosition = this->getActualMenu().getFirst();
       nonePressed = 0;
+      timeAlarm = 0;
+      timeAlarmHelp = 0;
+      timeFallen = 0;
+      alarmFallen = false;
 
     //si l'app est allumée, il demande à l'utilisateur s'il veut vraiment l'éteindre
     }else{
